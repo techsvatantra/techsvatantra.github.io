@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Contact - Tech Svatantra</title>
+  <title>Registrations - Tech Svatantra</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -44,7 +44,7 @@
       var form = document.forms['submit-to-google-sheet']
 
       form.addEventListener('submit', async function (e) {
-        var scriptURL = 'https://script.google.com/macros/s/AKfycbyM1-cOx-ZpuKCnVfMLOGRvI1pmbRFUKXSZgfPpGP5PPmQfh_mC97yrzeKQmlzEqQSx/exec'
+        var scriptURL = 'https://script.google.com/macros/s/AKfycbyw-ZXzjU_k2aTF12HeZknJF5USjxFQiSlP3gm2tpd6WMCTK_Ss7guVXiPUACC1E2RRRQ/exec'
         var successMessage = document.getElementById('success-message');
         var sendingMessage = document.getElementById('sending-message');
         e.preventDefault();
@@ -81,8 +81,8 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="courses.html">Courses</a></li>
-          <li><a class="active" href="contact.html">Contact</a></li>
-          <li><a href="registrations.html">Registrations</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a class="active" href="registrations.html">Registrations</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -97,8 +97,9 @@
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs" data-aos="fade-in">
       <div class="container">
-        <h2>Contact Us</h2>
-        <p>Leave us your feedback or get in touch if you have any questions</p>
+        <h2>Registrations</h2>
+        <p>You can register yourself or on behalf of someone else, Please answer few simple questions it will help us in
+          planning the workshop. We will get back as soon as possible with more details.</p>
       </div>
     </div><!-- End Breadcrumbs -->
 
@@ -109,30 +110,6 @@
 
         <div class="row mt-5">
 
-          <div class="col-lg-4">
-            <div class="info">
-              <div class="address">
-                <i class="bi bi-geo-alt"></i>
-                <h4>Location:</h4>
-                <p>Bangalore</p>
-              </div>
-
-              <div class="email">
-                <i class="bi bi-envelope"></i>
-                <h4>Email:</h4>
-                <p>techsvatantra@gmail.com</p>
-              </div>
-
-              <div class="phone">
-                <i class="bi bi-phone"></i>
-                <h4>Call:</h4>
-                <p>+91 99023 91Four76</p>
-              </div>
-
-            </div>
-
-          </div>
-
           <div class="col-lg-8 mt-5 mt-lg-0">
 
             <form method="post" role="form" class="php-email-form" id="submit-to-google-sheet"
@@ -140,28 +117,48 @@
 
               <div class="row gy-3">
                 <div class="col-md-6 form-group">
-                  <label for="name">Name</label>
+                  <label for="name">Your Name</label>
                   <input type="text" name="name" class="form-control" id="name" required>
                 </div>
-                <div class="col-md-6 form-group">
-                  <label for="name">Email</label>
+                <div class="col-md-12 form-group">
+                  <label for="name">Your Email (we will send the workshop details here)</label>
                   <input type="email" class="form-control" name="email" id="email" required>
                 </div>
                 <div class="col-md-12 form-group">
-                  <label for="name">Subject</label>
-                  <input type="text" class="form-control" name="subject" id="subject" required>
+                  <label for="name">Your Phone Number</label>
+                  <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" required>
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="name">What would you like to learn?</label>
+                  </label><br>
+                  <label>
+                    <input type="checkbox" name="netbanking" value="Netbanking">
+                    Netbanking
+                  </label><br>
+                  <label>
+                    <input type="checkbox" name="bookingCabs" value="BookingCabs">
+                    Booking cabs
+                  </label><br>
+                  <label>
+                    <input type="checkbox" name="payingUtilityBills" value="PayingUtilityBills">
+                    Paying Utility bills
+                  </label><br>
+                  <label>
+                    <input type="checkbox" name="avoidingFrauds" value="AvoidingFrauds">
+                    Avoiding frauds
+                  </label><br>
                 </div>
                 <div class="col-md-12 form-group">
-                  <label for="name">Message</label>
-                  <textarea class="form-control" name="message" cols="30" rows="10" required></textarea>
+                  <label for="name">Tell us what you think?</label>
+                  <textarea class="form-control" name="message" cols="5" rows="5" required></textarea>
                 </div>
 
                 <div class="col-md-12 my-3">
                   <div id="sending-message" style="display: none;">Please wait, Your message is being
                     sent...
                   </div>
-                  <div id="success-message" style="display: none;">Your message has been sent. Thank
-                    you!
+                  <div id="success-message" style="display: none;">Thank you for registering your interest. We will
+                    notify you soon.
                   </div>
                   <div id="error-message" class="error-message" style="display: none;">Oh, We
                     apologise, your message
@@ -169,7 +166,7 @@
                 </div>
 
                 <div class="col-md-6 mt-0 form-group">
-                  <input type="submit" class="readmore d-block w-100" value="Send Message">
+                  <input type="submit" class="readmore d-block w-100" value="Show Interest">
                 </div>
               </div>
 
