@@ -44,7 +44,7 @@
       var form = document.forms['submit-to-google-sheet']
 
       form.addEventListener('submit', async function (e) {
-        var scriptURL = 'https://script.google.com/macros/s/AKfycbx2txlkair8qsMXg2UqyqdW1Xt048Ud1834ET12OmVwBmIlyxa2EMFwuW-cdN7SPURO/exec'
+        var scriptURL = 'https://script.google.com/macros/s/AKfycby-rRpTGGvW_dRlAj_-YbYd_WmVyPyoSuWGOChXJXnRvB2lgeUqeQMnHsT6bavhSX2cfg/exec'
         var successMessage = document.getElementById('success-message');
         var sendingMessage = document.getElementById('sending-message');
         e.preventDefault();
@@ -117,16 +117,37 @@
 
               <div class="row gy-3">
                 <div class="col-md-6 form-group">
-                  <label for="name">Your Name</label>
+                  <label for="name">Registrant Name</label>
                   <input type="text" name="name" class="form-control" id="name" maxlength="100" required>
                 </div>
                 <div class="col-md-12 form-group">
-                  <label for="name">Your Email (we will send the workshop details here)</label>
-                  <input type="email" class="form-control" name="email" id="email" maxlength="255" required>
+                  <label for="name">Registrant Email</label>
+                  <input type="email" class="form-control" name="email" id="email" maxlength="255">
                 </div>
                 <div class="col-md-12 form-group">
-                  <label for="name">Your Phone Number (+91 NOT required)</label>
+                  <label for="name">Registrant Phone Number (+91 NOT required)</label>
                   <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" maxlength="10" required>
+                </div>
+                <div class="col-md-12 form-group">
+                  <label for="name">Registrant Age</label>
+                  <input type="text" class="form-control" name="age" id="age" maxlength="2" required>
+                </div>
+                <div class="col-md-12 form-group">
+                  <label for="name">Your Location (Area in Bangalore, ex. Banashankari 2nd Stage)</label>
+                  <input type="text" class="form-control" name="workshopArea" id="workshopArea" maxlength="100"
+                    required>
+                </div>
+                <div class="col-md-12 form-group">
+                  <label for="name">Willing to give space for the workshop (in your Apartment community hall for
+                    ex.)</label>
+                  <label>
+                    <input type="radio" name="choice" value="yesSpace">
+                    Yes
+                  </label>
+                  <label>
+                    <input type="radio" name="choice" value="noSpace">
+                    No
+                  </label>
                 </div>
                 <div class="col-md-6 form-group">
                   <label for="name">Which of these is important to you?</label>
