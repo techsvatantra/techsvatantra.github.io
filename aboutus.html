@@ -41,28 +41,6 @@
   <script>
     window.addEventListener('load', (event) => {
       console.log('The page has fully loaded');
-      var form = document.forms['submit-to-google-sheet']
-
-      form.addEventListener('submit', async function (e) {
-        var scriptURL = 'https://script.google.com/macros/s/AKfycbyM1-cOx-ZpuKCnVfMLOGRvI1pmbRFUKXSZgfPpGP5PPmQfh_mC97yrzeKQmlzEqQSx/exec'
-        var successMessage = document.getElementById('success-message');
-        var sendingMessage = document.getElementById('sending-message');
-        e.preventDefault();
-        const response = await fetch(scriptURL, {
-          method: "POST",
-          body: new FormData(form),
-        });
-        if (response.ok) {
-          console.log("Form submitted successfully!");
-          document.getElementById("success-message").style.display = 'block';
-          document.getElementById("error-message").style.display = 'none';
-        } else {
-          console.error("Error submitting form:", response.statusText);
-          document.getElementById("success-message").style.display = 'none';
-          document.getElementById("error-message").style.display = 'block';
-        }
-
-      });
     })
   </script>
 </head>
@@ -96,8 +74,7 @@
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs" data-aos="fade-in">
       <div class="container">
-        <h2>Contact Us</h2>
-        <p>Leave us your feedback or get in touch if you have any questions</p>
+        <h2>About Us</h2>
       </div>
     </div><!-- End Breadcrumbs -->
 
@@ -110,22 +87,9 @@
 
           <div class="col-lg-4">
             <div class="info">
-              <div class="address">
-                <i class="bi bi-geo-alt"></i>
-                <h4>Location:</h4>
-                <p>Bangalore</p>
-              </div>
-
-              <div class="email">
-                <i class="bi bi-envelope"></i>
-                <h4>Email:</h4>
-                <p>techsvatantra@gmail.com</p>
-              </div>
-
               <div class="phone">
                 <i class="bi bi-phone"></i>
-                <h4>Call:</h4>
-                <p>+91 99023 91Four76</p>
+                <h4><a href="registrations.html">Register here</a></h4>
               </div>
 
             </div>
@@ -134,49 +98,66 @@
 
           <div class="col-lg-8 mt-5 mt-lg-0">
 
-            <form method="post" role="form" class="php-email-form" id="submit-to-google-sheet"
-              name="submit-to-google-sheet">
+            <div class="row gy-3">
+            </div>
+            <p><b>Motivation</b></p>
+            <p>Have you experienced any of these as a Digital Literate?</p>
+            <ul>
+              <li>You visit a bank for some work and you see Senior citizens in a queue waiting for passbook updates?
+                Some
+                of them won't be able to figure out how to do it without assistance, I have helped many sometimes.</li>
+              <li>You visit an ATM, and someone asks you to help them withdraw money from ATM</li>
+              <li>Asking to withdraw money from ATM, and they are willing to share their password too...</li>
+              <li>Many shops don't provide change, they ask to make UPI payment, My mother often faces this challenge.
+              </li>
+              <li>Many are unwilling to book taxi or cab, they still walk to an auto stand or bus stop</li>
+            </ul>
+            <p>So, What's happening? even after multiple trainings, they are not confident about using the technology.
+              When asked, the reason cited is "this is hard", "I don\'t understand", "I am afraid". I have heard many
+              stories of such incidents where senior citizens are at the receiving end of the technology boom.</p>
+            <br />
+            <p>Unfortunately, there are no training programs that address this problem. During the Covid times, many
+              Training programs happened, and all of them were conducted online. In a very recent article in <a
+                href="https://www.deccanherald.com/india/karnataka/bengaluru/tangled-web-senior-citizens-navigate-a-complex-digital-world-2968208"
+                target="_blank">Deccan Herald (April 7th 2024)</a>, it still highlighted the problems created
+              because of the Digital
+              Divide.
+            <p>At TechSvatantra we want to empower all the digitally marginalised people, make them confident Tech
+              Citizens. We offer to train those left out by conducting Offline workshops, slow paced session that give
+              the participant the required push.</p>
 
-              <div class="row gy-3">
-                <div class="col-md-6 form-group">
-                  <label for="name">Name</label>
-                  <input type="text" name="name" class="form-control" id="name" maxlength="100" required>
-                </div>
-                <div class="col-md-6 form-group">
-                  <label for="name">Email</label>
-                  <input type="email" class="form-control" name="email" id="email" maxlength="255" required>
-                </div>
-                <div class="col-md-12 form-group">
-                  <label for="name">Subject</label>
-                  <input type="text" class="form-control" name="subject" id="subject" maxlength="255" required>
-                </div>
-                <div class="col-md-12 form-group">
-                  <label for="name">Message</label>
-                  <textarea class="form-control" name="message" cols="30" rows="10" maxlength="500" required></textarea>
-                </div>
+            <div>
+              <p><b>Cost for the Training</b></p>
+              <p>I have observed that free workshops invite lot of crowd and the focus is lost, we aim to really help
+                those who are interested.</p>
+            </div>
 
-                <div class="col-md-12 my-3">
-                  <div id="sending-message" style="display: none;">Please wait, Your message is being
-                    sent...
-                  </div>
-                  <div id="success-message" style="display: none;">Your message has been sent. Thank
-                    you!
-                  </div>
-                  <div id="error-message" class="error-message" style="display: none;">Oh, We
-                    apologise, your message
-                    could not be saved. Please try again!</div>
-                </div>
-
-                <div class="col-md-6 mt-0 form-group">
-                  <input type="submit" class="readmore d-block w-100" value="Send Message">
-                </div>
-              </div>
-
-            </form>
+            <div>
+              <p><b>About the Trainer</b></p>
+              <ul>
+                <i class="bx bx-chevron-right"></i>17+ yrs. of experience in Software Industry, working as Software
+                Engineer/Architect
+                <br />
+                <i class="bx bx-chevron-right"></i>Extensive experience in Android and iOS Application Development,
+                <a href="https://play.google.com/store/apps/dev?id=7531622189850905021" target="_blank">5
+                  Android Apps</a> published on the Google Android Store and <a
+                  href="https://apps.apple.com/in/app/sri-vishnu-sahasranama/id6451326611" target="_blank">1 App</a> on
+                the iOS App Store
+                <br />
+                <i class="bx bx-chevron-right"></i>Ph. D in computer science, experience in teaching M.Sc., M.S(IT)
+                students at Jain University
+                <br />
+                <a href="www.linkedin.com/in/varun-tayur" target="_blank">Get in Touch with Varun Tayur</a>
+              </ul>
+            </div>
 
           </div>
-
         </div>
+
+
+      </div>
+
+      </div>
 
       </div>
     </section><!-- End Contact Section -->
