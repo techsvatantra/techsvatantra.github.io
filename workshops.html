@@ -36,6 +36,22 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+<style>
+  .half-height-carousel {
+    max-height: 50vh;
+    overflow: hidden;
+  }
+
+  .half-height-carousel .carousel-item {
+    height: 50vh;
+  }
+
+  .half-height-carousel img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+</style>
 </head>
 
 <body>
@@ -71,12 +87,31 @@
       </div>
     </div><!-- End Breadcrumbs -->
 
+    
     <!-- ======= workshops Section ======= -->
     <section id="courses" class="courses">
       <div class="container" data-aos="fade-up">
 
+        <!-- Photo Carousel -->
+        <div id="workshopCarousel" class="carousel slide half-height-carousel" data-bs-ride="carousel">
+          <div class="carousel-inner" id="carousel-inner">
+            <!-- Carousel items will be inserted here by JavaScript -->
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#workshopCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#workshopCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+        <!-- Modals will be inserted here by JavaScript -->
+        <div id="modals-container"></div>
         <div class="row" data-aos="zoom-in" data-aos-delay="100">
-
+          <div class="col-12 mt-4">
+            <p class="text-left">Explore our workshops and enhance your skills!</p>
+          </div>
           <!-- BEGINNER -->
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
             <div class="course-item">
@@ -226,6 +261,140 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
+<!-- Custom JS to dynamically generate carousel items and modals -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    /*const images = [
+      {
+        src: 'assets/img/Training-1 Bhagwan Buddha Hospital - Nagarabhavi/English-Training-Brochure.jpeg',
+        alt: 'Workshop 1',
+        title: 'Workshop 1'
+      },
+      {
+        src: 'assets/img/Training-1 Bhagwan Buddha Hospital - Nagarabhavi/Kannada-Training-Brochure.jpeg',
+        alt: 'Workshop 2',
+        title: 'Workshop 2'
+      },
+      {
+        src: 'assets/img/workshop3.jpg',
+        alt: 'Workshop 3',
+        title: 'Workshop 3'
+      }
+    ];*/
+    const folders = [
+      {
+        "name": 'Training-1 Bhagwan Buddha Hospital - Nagarabhavi',
+        "files": [
+          'English-Training-Brochure.jpeg',
+          'Kannada-Training-Brochure.jpeg',
+          '1.jpeg',
+          '2.jpeg',
+          '3.jpeg'
+        ]
+      },
+      {
+        "name": 'Training-2 Rotary Hall - Malleshwaram',
+        "files": [
+          'English-Training-Brochure.jpeg',
+          '1.jpeg',
+          '2.jpeg',
+          '3.jpeg',
+          '4.jpeg',
+          '5.jpeg',
+          '6.jpeg',
+          '7.jpeg',
+        ]
+      },
+      {
+        "name": 'Training-3 Chamundi Day Care - Amruthahalli',
+        "files": [
+          'English-Training-Brochure.jpeg',
+          'Kannada-Training-Brochure.jpeg',
+          '1.jpeg',
+          '2.jpeg',
+          '3.jpeg',
+          '4.jpeg',
+          '5.jpeg',
+          '6.jpeg',
+        ]
+      },
+      {
+        "name": 'Training-4 Kothanur CSI Church - Kothanur',
+        "files": [
+          'English-Training-Brochure.jpeg',
+          '1.jpeg',
+          '2.jpeg',
+          '3.jpeg',
+          '4.jpeg',
+          '5.jpeg',
+          '6.jpeg',
+          '7.jpeg',
+          '8.jpeg',
+          '9.jpeg',
+          '10.jpeg',
+          '11.jpeg',
+        ]
+      },
+      {
+        "name": 'Training-5 Nightingales Trust Office - Kasturinagar',
+        "files": [
+          'English-Training-Brochure.jpeg',
+          'Kannada-Training-Brochure.jpeg'
+        ]
+      }
+    ];
+
+    const images = [];
+
+    folders.forEach(folder => {
+      folder.files.forEach(file => {
+        images.push({
+          src: `assets/img/${folder.name}/${file}`,
+          alt: `${folder.name} - ${file}`,
+          title: folder.name
+        });
+      });
+    });
+
+    const carouselInner = document.getElementById('carousel-inner');
+    const modalsContainer = document.getElementById('modals-container');
+
+    images.forEach((image, index) => {
+      // Create carousel item
+      const carouselItem = document.createElement('div');
+      carouselItem.className = `carousel-item${index === 0 ? ' active' : ''}`;
+      carouselItem.innerHTML = `
+          <img src="${image.src}" class="d-block w-100" alt="${image.alt}" data-bs-toggle="modal" data-bs-target="#modal${index}">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>${image.title}</h5>
+          </div>
+        `;
+      carouselInner.appendChild(carouselItem);
+
+      // Create modal
+      const modal = document.createElement('div');
+      modal.className = 'modal fade';
+      modal.id = `modal${index}`;
+      modal.tabIndex = -1;
+      modal.setAttribute('aria-labelledby', `modalLabel${index}`);
+      modal.setAttribute('aria-hidden', 'true');
+      modal.innerHTML = `
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel${index}">${image.title}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <img src="${image.src}" class="img-fluid" alt="${image.alt}">
+              </div>
+            </div>
+          </div>
+        `;
+      modalsContainer.appendChild(modal);
+    });
+  });
+</script>
 </body>
 
 </html>
