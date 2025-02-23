@@ -97,10 +97,16 @@
           <div class="carousel-inner" id="carousel-inner">
             <!-- Carousel items will be inserted here by JavaScript -->
           </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#workshopCarousel" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#workshopCarousel" data-bs-slide="prev"
+              style="background-color: lightblue;">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
-          </button>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#workshopCarousel" data-bs-slide="next"
+              style="background-color: lightblue;">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
           <button class="carousel-control-next" type="button" data-bs-target="#workshopCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
@@ -264,23 +270,7 @@
 <!-- Custom JS to dynamically generate carousel items and modals -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    /*const images = [
-      {
-        src: 'assets/img/Training-1 Bhagwan Buddha Hospital - Nagarabhavi/English-Training-Brochure.jpeg',
-        alt: 'Workshop 1',
-        title: 'Workshop 1'
-      },
-      {
-        src: 'assets/img/Training-1 Bhagwan Buddha Hospital - Nagarabhavi/Kannada-Training-Brochure.jpeg',
-        alt: 'Workshop 2',
-        title: 'Workshop 2'
-      },
-      {
-        src: 'assets/img/workshop3.jpg',
-        alt: 'Workshop 3',
-        title: 'Workshop 3'
-      }
-    ];*/
+
     const folders = [
       {
         "name": 'Training-1 Bhagwan Buddha Hospital - Nagarabhavi',
