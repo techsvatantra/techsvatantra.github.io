@@ -36,22 +36,91 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-<style>
-  .half-height-carousel {
-    max-height: 50vh;
-    overflow: hidden;
-  }
+  <style>
+    .half-height-carousel {
+      max-height: 50vh;
+      overflow: hidden;
+    }
 
-  .half-height-carousel .carousel-item {
-    height: 50vh;
-  }
+    .half-height-carousel .carousel-item {
+      height: 50vh;
+    }
 
-  .half-height-carousel img {
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
-  }
-</style>
+    .half-height-carousel img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+
+    /* Custom indicators for workshop names */
+    .custom-indicators {
+      position: absolute !important;
+      left: 0 !important;
+      top: 0 !important;
+      bottom: 0 !important;
+      width: 200px !important;
+      margin: 0 !important;
+      padding: 10px 0 !important;
+      background-color: rgba(0, 0, 0, 0.5) !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      align-items: flex-start !important;
+      z-index: 10 !important;
+      overflow-y: auto !important;
+      border-radius: 0 !important;
+      text-align: left !important;
+      right: auto !important;
+      /* Override Bootstrap's right property */
+    }
+
+    .custom-indicators button {
+      width: 100% !important;
+      text-align: left !important;
+      background: none !important;
+      border: none !important;
+      color: white !important;
+      padding: 8px 15px !important;
+      margin: 0 !important;
+      text-indent: 0 !important;
+      height: auto !important;
+      transition: background-color 0.3s !important;
+      border-radius: 0 !important;
+      opacity: 0.7 !important;
+      position: relative !important;
+      flex: 0 0 auto !important;
+      display: block !important;
+    }
+
+    .custom-indicators button.active {
+      background-color: rgba(255, 255, 255, 0.3) !important;
+      opacity: 1 !important;
+      font-weight: bold !important;
+    }
+
+    .custom-indicators button:hover {
+      background-color: rgba(255, 255, 255, 0.2) !important;
+      opacity: 1 !important;
+    }
+
+    /* Adjust carousel content to make room for indicators */
+    .carousel-inner {
+      margin-left: 200px;
+      width: calc(100% - 200px);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .custom-indicators {
+        width: 150px;
+      }
+
+      .carousel-inner {
+        margin-left: 150px;
+        width: calc(100% - 150px);
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -87,7 +156,7 @@
       </div>
     </div><!-- End Breadcrumbs -->
 
-    
+
     <!-- ======= workshops Section ======= -->
     <section id="courses" class="courses">
       <div class="container" data-aos="fade-up">
@@ -96,19 +165,19 @@
         </div>
         <!-- Photo Carousel -->
         <div id="workshopCarousel" class="carousel slide half-height-carousel" data-bs-ride="carousel">
+          <!-- Use a different class for indicators to avoid conflicts -->
+          <div class="custom-indicators" id="workshop-indicators">
+            <!-- Indicators will be inserted here by JavaScript -->
+          </div>
+
           <div class="carousel-inner" id="carousel-inner">
             <!-- Carousel items will be inserted here by JavaScript -->
           </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#workshopCarousel" data-bs-slide="prev"
-              style="background-color: lightblue;">
+
+          <button class="carousel-control-prev" type="button" data-bs-target="#workshopCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#workshopCarousel" data-bs-slide="next"
-              style="background-color: lightblue;">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
+          </button>
           <button class="carousel-control-next" type="button" data-bs-target="#workshopCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
@@ -269,134 +338,211 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
-<!-- Custom JS to dynamically generate carousel items and modals -->
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
+  <!-- Custom JS to dynamically generate carousel items and modals -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
 
-    const folders = [
-      {
-        "name": 'Training-1 Bhagwan Buddha Hospital - Nagarabhavi',
-        "files": [
-          'English-Training-Brochure.jpeg',
-          'Kannada-Training-Brochure.jpeg',
-          '1.jpeg',
-          '2.jpeg',
-          '3.jpeg'
-        ]
-      },
-      {
-        "name": 'Training-2 Rotary Hall - Malleshwaram',
-        "files": [
-          'English-Training-Brochure.jpeg',
-          '1.jpeg',
-          '2.jpeg',
-          '3.jpeg',
-          '4.jpeg',
-          '5.jpeg',
-          '6.jpeg',
-          '7.jpeg',
-        ]
-      },
-      {
-        "name": 'Training-3 Chamundi Day Care - Amruthahalli',
-        "files": [
-          'English-Training-Brochure.jpeg',
-          'Kannada-Training-Brochure.jpeg',
-          '1.jpeg',
-          '2.jpeg',
-          '3.jpeg',
-          '4.jpeg',
-          '5.jpeg',
-          '6.jpeg',
-        ]
-      },
-      {
-        "name": 'Training-4 Kothanur CSI Church - Kothanur',
-        "files": [
-          'English-Training-Brochure.jpeg',
-          '1.jpeg',
-          '2.jpeg',
-          '3.jpeg',
-          '4.jpeg',
-          '5.jpeg',
-          '6.jpeg',
-          '7.jpeg',
-          '8.jpeg',
-          '9.jpeg',
-          '10.jpeg',
-          '11.jpeg',
-        ]
-      },
-      {
-        "name": 'Training-5 Nightingales Trust Office - Kasturinagar',
-        "files": [
-          'English-Training-Brochure.jpeg',
-          'Kannada-Training-Brochure.jpeg',
-          '1.jpeg',
-          '2.jpeg',
-          '3.jpeg',
-          '4.jpeg',
-          '5.jpeg',
-          '6.jpeg',
-          '7.jpeg',
-          '8.jpeg'
-        ]
-      },
-      {
-        "name": 'Training-6 AnanthaLakshmi - BSK 3rd Stage',
-        "files": [
-          'English-Training-Brochure.jpeg',
-          '1.jpeg',
-          '2.jpeg',
-          '3.jpeg',
-          '4.jpeg',
-          '5.jpeg',
-          '6.jpeg',
-          '7.jpeg',
-          '8.jpeg',
-          '9.jpeg',
-          '10.jpeg',
-          '11.jpeg',
-          '12.jpeg'
-        ]
-      }
-    ];
+      const folders = [
+        {
+          "name": 'Training-1 Bhagwan Buddha Hospital - Nagarabhavi',
+          "files": [
+            'English-Training-Brochure.jpeg',
+            'Kannada-Training-Brochure.jpeg',
+            '1.jpeg',
+            '2.jpeg',
+            '3.jpeg'
+          ]
+        },
+        {
+          "name": 'Training-2 Rotary Hall - Malleshwaram',
+          "files": [
+            'English-Training-Brochure.jpeg',
+            '1.jpeg',
+            '2.jpeg',
+            '3.jpeg',
+            '4.jpeg',
+            '5.jpeg',
+            '6.jpeg',
+            '7.jpeg',
+          ]
+        },
+        {
+          "name": 'Training-3 Chamundi Day Care - Amruthahalli',
+          "files": [
+            'English-Training-Brochure.jpeg',
+            'Kannada-Training-Brochure.jpeg',
+            '1.jpeg',
+            '2.jpeg',
+            '3.jpeg',
+            '4.jpeg',
+            '5.jpeg',
+            '6.jpeg',
+          ]
+        },
+        {
+          "name": 'Training-4 Kothanur CSI Church - Kothanur',
+          "files": [
+            'English-Training-Brochure.jpeg',
+            '1.jpeg',
+            '2.jpeg',
+            '3.jpeg',
+            '4.jpeg',
+            '5.jpeg',
+            '6.jpeg',
+            '7.jpeg',
+            '8.jpeg',
+            '9.jpeg',
+            '10.jpeg',
+            '11.jpeg',
+          ]
+        },
+        {
+          "name": 'Training-5 Nightingales Trust Office - Kasturinagar',
+          "files": [
+            'English-Training-Brochure.jpeg',
+            'Kannada-Training-Brochure.jpeg',
+            '1.jpeg',
+            '2.jpeg',
+            '3.jpeg',
+            '4.jpeg',
+            '5.jpeg',
+            '6.jpeg',
+            '7.jpeg',
+            '8.jpeg'
+          ]
+        },
+        {
+          "name": 'Training-6 AnanthaLakshmi - BSK 3rd Stage',
+          "files": [
+            'English-Training-Brochure.jpeg',
+            '1.jpeg',
+            '2.jpeg',
+            '3.jpeg',
+            '4.jpeg',
+            '5.jpeg',
+            '6.jpeg',
+            '7.jpeg',
+            '8.jpeg',
+            '9.jpeg',
+            '10.jpeg',
+            '11.jpeg',
+            '12.jpeg'
+          ]
+        },
+        {
+          "name": 'Training-7 Rotary Hall - Malleshwaram',
+          "files": [
+            '1.jpeg',
+            '2.jpg',
+            '3.jpeg',
+            '4.jpeg',
+          ]
+        },
+        {
+          "name": 'Training-8 Hubli',
+          "files": [
+            '1.jpeg',
+            '2.jpeg',
+            '3.jpeg',
+            '4.jpeg',
+            '5.jpeg',
+            '6.jpeg',
+            '7.jpeg',
+            '8.jpeg',
+            '9.jpeg',
+            '10.jpeg',
+          ]
+        },
+        {
+          "name": 'Training-9 Mysore',
+          "files": [
+            '1.jpeg',
+            '2.jpeg',
+            '3.jpeg',
+            '4.jpeg',
+          ]
+        },
+        {
+          "name": 'Training-10 St.Johns Church Frazer Town',
+          "files": [
+            '1.jpg',
+            '2.jpg',
+            '3.jpg',
+            '4.jpg',
+            '5.jpg',
+          ]
+        },
+        {
+          "name": 'Training-11 Madilu Bsk 3rd Stage',
+          "files": [
+            'Brochure-English.jpeg',
+          ]
+        }
+      ];
 
-    const images = [];
+      const images = [];
+      const folderStartIndices = [];
+      let totalImageCount = 0;
 
-    folders.forEach(folder => {
-      folder.files.forEach(file => {
-        images.push({
-          src: `assets/img/${folder.name}/${file}`,
-          alt: `${folder.name} - ${file}`,
-          title: folder.name
+      // Process folders and track starting indices for each workshop
+      folders.forEach(folder => {
+        folderStartIndices.push({
+          name: folder.name,
+          startIndex: totalImageCount
         });
+
+        folder.files.forEach(file => {
+          images.push({
+            src: `assets/img/${folder.name}/${file}`,
+            alt: `${folder.name} - ${file}`,
+            title: folder.name,
+            folder: folder.name
+          });
+        });
+
+        totalImageCount += folder.files.length;
       });
-    });
 
-    const carouselInner = document.getElementById('carousel-inner');
-    const modalsContainer = document.getElementById('modals-container');
+      const carouselInner = document.getElementById('carousel-inner');
+      const modalsContainer = document.getElementById('modals-container');
 
-    images.forEach((image, index) => {
-      // Create carousel item
-      const carouselItem = document.createElement('div');
-      carouselItem.className = `carousel-item${index === 0 ? ' active' : ''}`;
-      carouselItem.innerHTML = `
+      // Create carousel indicators (workshop names)
+      const indicatorsContainer = document.getElementById('workshop-indicators');
+      folderStartIndices.forEach((workshop, index) => {
+        const indicator = document.createElement('button');
+        indicator.type = 'button';
+        indicator.setAttribute('data-bs-target', '#workshopCarousel');
+        indicator.setAttribute('data-bs-slide-to', workshop.startIndex);
+        if (index === 0) indicator.classList.add('active');
+
+        // Extract just the location part for display
+        const nameMatch = workshop.name.match(/Training-\d+ (.+)/);
+        const shortName = nameMatch ? nameMatch[1] : workshop.name;
+        indicator.textContent = shortName;
+
+        indicatorsContainer.appendChild(indicator);
+      });
+
+      images.forEach((image, index) => {
+        // Create carousel item
+        const carouselItem = document.createElement('div');
+        carouselItem.className = `carousel-item${index === 0 ? ' active' : ''}`;
+        carouselItem.innerHTML = `
           <img src="${image.src}" class="d-block w-100" alt="${image.alt}" data-bs-toggle="modal" data-bs-target="#modal${index}">
           <div class="carousel-caption d-none d-md-block">
             <h5>${image.title}</h5>
           </div>
         `;
-      carouselInner.appendChild(carouselItem);
+        carouselInner.appendChild(carouselItem);
 
-      // Create modal
-      const modal = document.createElement('div');
-      modal.className = 'modal fade';
-      modal.id = `modal${index}`;
-      modal.tabIndex = -1;
-      modal.setAttribute('aria-labelledby', `modalLabel${index}`);
-      modal.setAttribute('aria-hidden', 'true');
-      modal.innerHTML = `
+        // Create modal
+        const modal = document.createElement('div');
+        modal.className = 'modal fade';
+        modal.id = `modal${index}`;
+        modal.tabIndex = -1;
+        modal.setAttribute('aria-labelledby', `modalLabel${index}`);
+        modal.setAttribute('aria-hidden', 'true');
+        modal.innerHTML = `
           <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
               <div class="modal-header">
@@ -409,10 +555,39 @@
             </div>
           </div>
         `;
-      modalsContainer.appendChild(modal);
+        modalsContainer.appendChild(modal);
+      });
+
+      // Add event handler to update active indicator based on current slide
+      const carousel = document.getElementById('workshopCarousel');
+      const bsCarousel = new bootstrap.Carousel(carousel);
+
+      carousel.addEventListener('slide.bs.carousel', event => {
+        const slideIndex = event.to;
+
+        // Find which workshop this slide belongs to
+        let activeWorkshopIndex = 0;
+        for (let i = 0; i < folderStartIndices.length; i++) {
+          if (i === folderStartIndices.length - 1 ||
+            (slideIndex >= folderStartIndices[i].startIndex &&
+              slideIndex < folderStartIndices[i + 1].startIndex)) {
+            activeWorkshopIndex = i;
+            break;
+          }
+        }
+
+        // Update active indicator
+        const indicators = indicatorsContainer.querySelectorAll('button');
+        indicators.forEach((indicator, index) => {
+          if (index === activeWorkshopIndex) {
+            indicator.classList.add('active');
+          } else {
+            indicator.classList.remove('active');
+          }
+        });
+      });
     });
-  });
-</script>
+  </script>
 </body>
 
 </html>
