@@ -61,17 +61,47 @@ const Careers = () => {
   
   const handleFileChange = (e) => {
     const file = e.target.files[0];
+    console.log('File change event:', file);
+    console.log('File details:', file ? {
+      name: file.name,
+      type: file.type,
+      size: file.size
+    } : 'No file');
+    
     if (file) {
       setLocalFormData(prev => ({...prev, resumeName: file.name}));
-      setValue("resume", file, { shouldValidate: true });
+      setValue("resume", file, { 
+        shouldValidate: true,
+        shouldDirty: true,
+        shouldTouch: true
+      });
+      
+      // Verify it was set
+      setTimeout(() => {
+        const currentValue = getValues('resume');
+        console.log('Form value after setValue:', currentValue);
+        console.log('Is current value a File?', currentValue instanceof File);
+      }, 100);
+      
     } else {
       setLocalFormData(prev => ({...prev, resumeName: ''}));
-      setValue("resume", null, { shouldValidate: true });
+      setValue("resume", null, { 
+        shouldValidate: true,
+        shouldDirty: true,
+        shouldTouch: true
+      });
     }
   };
 
   const nextStep = async () => {
+    console.log('Before validation - current form values:', getValues());
+    console.log('Resume value before validation:', getValues('resume'));
+    
     const isValid = await trigger();
+    console.log('Validation result:', isValid);
+    console.log('After validation - current form values:', getValues());
+    console.log('Resume value after validation:', getValues('resume'));
+    
     if (isValid) {
       setCurrentStep(prev => prev < 3 ? prev + 1 : prev);
     }
@@ -80,6 +110,16 @@ const Careers = () => {
   const prevStep = () => setCurrentStep(prev => prev > 1 ? prev - 1 : prev);
 
   const onSubmit = async (data) => {
+    console.group('Form Submission Debug');
+    console.log('Form data:', data);
+    console.log('Resume file:', data.resume);
+    console.log('Resume file type:', typeof data.resume);
+    console.log('Is File?:', data.resume instanceof File);
+    console.log('Is Blob?:', data.resume instanceof Blob);
+    console.log('Local form data:', localFormData);
+    console.log('All form values:', getValues());
+    console.groupEnd();
+    
     setIsLoading(true);
 
     const formData = new FormData();
@@ -94,22 +134,112 @@ const Careers = () => {
     });
     
     try {
-      const response = await fetch('/api/send-application', {
-        method: 'POST',
-        body: formData,
+      // Convert resume file to base64
+      let fileBase64 = '';
+      let contentType = '';
+      let fileName = '';
+      
+      console.log('Checking resume file:', data.resume);
+      console.log('Resume exists?', !!data.resume);
+      
+      if (data.resume) {
+        console.log('Resume file details:', {
+          name: data.resume.name,
+          type: data.resume.type,
+          size: data.resume.size,
+          lastModified: data.resume.lastModified
+        });
+        
+        // Check if data.resume is actually a File/Blob object
+        if (data.resume instanceof File || data.resume instanceof Blob) {
+          fileName = data.resume.name || 'resume';
+          contentType = data.resume.type || 'application/octet-stream';
+          
+          console.log('Processing file:', { fileName, contentType });
+          
+          try {
+            // Read the file as base64
+            const reader = new FileReader();
+            fileBase64 = await new Promise((resolve, reject) => {
+              reader.onload = () => {
+                console.log('FileReader onload triggered');
+                // Get base64 string without the prefix (e.g., "data:application/pdf;base64,")
+                const result = reader.result;
+                console.log('FileReader result type:', typeof result);
+                console.log('FileReader result preview:', result?.substring(0, 100));
+                
+                if (typeof result === 'string') {
+                  const base64String = result.split(',')[1];
+                  console.log('Base64 string length:', base64String?.length);
+                  resolve(base64String);
+                } else {
+                  reject(new Error('Failed to read file as string'));
+                }
+              };
+              reader.onerror = (error) => {
+                console.error('FileReader error:', error);
+                reject(new Error('File reading failed'));
+              };
+              console.log('Starting FileReader.readAsDataURL...');
+              reader.readAsDataURL(data.resume);
+            });
+            
+            console.log('Final fileBase64 length:', fileBase64?.length);
+            
+          } catch (fileError) {
+            console.error('Error reading file:', fileError);
+            throw new Error('Failed to process the resume file. Please try again.');
+          }
+        } else {
+          // Handle case where data.resume is not a proper File object
+          console.error('Invalid file object:', data.resume);
+          throw new Error('Invalid file selected. Please select a valid file.');
+        }
+      } else {
+        console.log('No resume file provided - this might be optional');
+      }
+      
+      // Prepare the payload as expected by the Google Apps Script
+      const payload = {
+        positionApplyingFor: data.positionApplyingFor,
+        fullName: data.fullName,
+        email: data.email,
+        phone: data.phone,
+        licenseType: data.licenseType,
+        issuingAuthority: data.issuingAuthority,
+        licenseNumber: data.licenseNumber,
+        expirationDate: data.expirationDate,
+        education: data.education,
+        experienceDuration: data.experienceDuration,
+        workHistory: JSON.stringify(data.workHistory),
+        consent: data.consent,
+        signature: data.signature,
+        fileBase64: fileBase64,
+        contentType: contentType,
+        fileName: fileName
+      };
+      
+      console.log('Final payload:', {
+        ...payload,
+        fileBase64: fileBase64 ? `[Base64 string of length ${fileBase64.length}]` : 'EMPTY',
+        workHistory: '[JSON string]'
       });
-
-      const responseText = await response.text();
-      let result;
-      try {
-        result = JSON.parse(responseText);
-      } catch (e) {
-        throw new Error("Received an invalid response from the server.");
-      }
-
+      
+      const response = await fetch('https://script.google.com/macros/s/AKfycbzGqfp6B7LOCzaZnSt2GcaMVjIKnu-CW1XNM9ChJyZA9k3CRc0XRMRMQyUp9j-HzK8RQA/exec', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+        mode: 'no-cors', // Required for Google Apps Script
+      });
+      
       if (!response.ok) {
-        throw new Error(result.message || 'Something went wrong');
+        const errorText = await response.text();
+        throw new Error(errorText || 'Failed to submit application');
       }
+      
+      const result = await response.json().catch(() => ({}));
 
       toast({
         title: "Application Submitted!",
@@ -158,7 +288,13 @@ const Careers = () => {
   const renderStep = () => {
     switch (currentStep) {
       case 1:
-        return <BasicInfoStep register={register} errors={errors} formData={localFormData} handleFileChange={handleFileChange} />;
+        return <BasicInfoStep 
+          control={control} // Add this
+          register={register} 
+          errors={errors} 
+          formData={localFormData} 
+          handleFileChange={handleFileChange} 
+        />;
       case 2:
         return <ExperienceStep control={control} register={register} errors={errors} />;
       case 3:

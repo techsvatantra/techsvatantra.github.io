@@ -14,7 +14,11 @@ const basicInfoSchema = yup.object({
   email: yup.string().email("Invalid email address").required("Email is required for confirmation"),
   address: yup.string().required("Address is required"),
   phone: yup.string().matches(phoneRegExp, "Phone number is not valid").required("Phone number is required"),
-  resume: yup.mixed().optional()
+  resume: yup.mixed().required("Resume/CV is required")
+    .test("fileType", "Please upload a valid file (PDF, DOC, DOCX)", (value) => {
+      if (!value) return false;
+      return value instanceof File;
+    })
 });
 
 const experienceSchema = yup.object({

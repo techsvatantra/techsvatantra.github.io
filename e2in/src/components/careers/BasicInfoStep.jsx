@@ -2,8 +2,9 @@ import React from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import FormError from "./FormError";
+import { Controller } from "react-hook-form";
 
-const BasicInfoStep = ({ register, errors, formData, handleFileChange }) => {
+const BasicInfoStep = ({ register, errors, formData, handleFileChange, control }) => {
   const { ref, ...rest } = register("resume");
   return (
     <div className="space-y-6">
@@ -31,19 +32,34 @@ const BasicInfoStep = ({ register, errors, formData, handleFileChange }) => {
         <FormError message={errors.address?.message} />
       </div>
       <div className="space-y-2">
-        <Label htmlFor="resume">Have a resume? Upload it here (optional)</Label>
-        <Input 
-          id="resume" 
-          type="file" 
-          {...rest}
-          ref={(e) => {
-            ref(e);
-          }}
-          onChange={handleFileChange}
-          className="file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
+        <Label htmlFor="resume">Resume/CV *</Label>
+        <Controller
+          name="resume"
+          control={control}
+          render={({ field: { onChange, onBlur, name }, fieldState: { error } }) => (
+            <div>
+              <Input
+                id="resume"
+                name={name}
+                type="file"
+                accept=".pdf,.doc,.docx"
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  onChange(file);
+                  handleFileChange(e);
+                }}
+                onBlur={onBlur}
+                className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/80"
+              />
+              {formData.resumeName && (
+                <p className="text-xs text-muted-foreground mt-1">
+                  Selected: {formData.resumeName}
+                </p>
+              )}
+              {error && <p className="text-red-500 text-xs mt-1">{error.message}</p>}
+            </div>
+          )}
         />
-        {formData.resumeName && <p className="text-xs text-muted-foreground mt-1">Selected: {formData.resumeName}</p>}
-        <FormError message={errors.resume?.message} />
       </div>
     </div>
   );
