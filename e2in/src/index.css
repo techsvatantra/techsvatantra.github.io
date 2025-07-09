@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -24,6 +25,8 @@
     --input: 240 5% 96%;
     --ring: 220 50% 55%; /* Soft Indigo for focus rings */
     --radius: 0.5rem;
+    --teal: 170 60% 40%; /* New Teal Color */
+    --dark-teal: 170 65% 30%; /* Darker Teal */
   }
 
   .dark {
@@ -46,6 +49,8 @@
     --border: 240 5% 20%;
     --input: 240 5% 12%;
     --ring: 220 50% 65%;
+    --teal: 170 50% 50%; /* New Teal Color for dark mode */
+    --dark-teal: 170 60% 40%; /* Darker Teal for dark mode */
   }
 }
 
@@ -63,6 +68,24 @@
   }
   .font-brand {
     font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer utilities {
+  .text-teal {
+    color: hsl(var(--teal));
+  }
+  .bg-teal {
+    background-color: hsl(var(--teal));
+  }
+  .bg-dark-teal {
+    background-color: hsl(var(--dark-teal));
+  }
+  .hover\:text-teal\/80:hover {
+    color: hsl(var(--teal) / 0.8);
+  }
+  .text-dark-teal {
+    color: hsl(var(--dark-teal));
   }
 }
 

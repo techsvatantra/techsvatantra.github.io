@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
@@ -31,19 +32,19 @@ const ProgressIndicator = ({ currentStep, steps }) => {
               <motion.div className="flex flex-col items-center text-center" variants={itemVariants}>
                 <div
                   className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-all duration-500 ${
-                    isActive ? 'bg-primary border-primary text-white' : isCompleted ? 'bg-green-500 border-green-500 text-white' : 'bg-white border-gray-300 text-gray-400'
+                    isActive ? 'bg-white border-white text-primary' : isCompleted ? 'bg-white/90 border-white/90 text-primary' : 'bg-transparent border-white/40 text-white/50'
                   }`}
                 >
                   {isCompleted ? <Check className="w-6 h-6" /> : <span className="font-bold text-lg">{stepIndex}</span>}
                 </div>
-                <p className={`mt-2 text-xs sm:text-sm font-semibold transition-colors duration-500 ${isActive ? 'text-primary' : isCompleted ? 'text-gray-700' : 'text-gray-400'}`}>
+                <p className={`mt-2 text-xs sm:text-sm font-semibold transition-colors duration-500 ${isActive ? 'text-white' : isCompleted ? 'text-white/80' : 'text-white/50'}`}>
                   {step}
                 </p>
               </motion.div>
               {index < steps.length - 1 && (
-                <div className="flex-1 h-1 mx-2 sm:mx-4 rounded-full bg-gray-200 relative">
+                <div className="flex-1 h-1 mx-2 sm:mx-4 rounded-full bg-white/20 relative">
                   <motion.div
-                    className="absolute top-0 left-0 h-full rounded-full bg-green-500"
+                    className="absolute top-0 left-0 h-full rounded-full bg-white"
                     initial={{ width: 0 }}
                     animate={{ width: isCompleted ? '100%' : '0%' }}
                     transition={{ duration: 0.5, ease: 'easeInOut' }}

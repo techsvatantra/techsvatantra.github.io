@@ -1,12 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, UserPlus, HeartHandshake, Info } from 'lucide-react';
+import { ArrowRight, UserPlus, HeartHandshake, Info, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import Services from '@/components/Services';
 import CTA from '@/components/CTA';
 import Contact from '@/components/Contact';
-import About from '@/components/About';
+import OurApproach from '@/components/OurApproach';
+import GuidingPillars from '@/components/GuidingPillars';
+import Footer from '@/components/Footer';
 
 const LandingPage = () => {
   const panelVariants = {
@@ -25,7 +26,7 @@ const LandingPage = () => {
         <Link to="/about-us">
           <Button variant="outline" className="bg-white/90 backdrop-blur-sm hover:bg-white text-foreground hover:text-primary border-gray-200 shadow-sm">
             <Info className="mr-2 h-4 w-4" />
-            About & Service Area
+            About & Service Areas
           </Button>
         </Link>
       </div>
@@ -47,12 +48,18 @@ const LandingPage = () => {
               I Need Care
             </h1>
             <p className="max-w-md text-lg text-primary-foreground/90 mb-8">Every home is different. That's why we listen first — and find care that feels natural and comforting</p>
-            <Link to="/about-us">
-              <Button size="lg" variant="outline" className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary text-base py-3 px-8 group">
-                Explore Our Services
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
+            <div className="flex flex-col sm:flex-row items-center gap-4">
+              <Link to="/services">
+                <Button size="lg" variant="outline" className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary text-base py-3 px-8 group w-full sm:w-auto">
+                  Choose Our Services
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+              <div className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-base font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white/20 text-white h-12 py-3 px-8 group w-full sm:w-auto">
+                  <Phone className="mr-2 h-5 w-5" />
+                  443-333-9645
+              </div>
+            </div>
           </motion.div>
         </motion.div>
 
@@ -80,10 +87,11 @@ const LandingPage = () => {
         </motion.div>
       </main>
 
-      <Services />
+      <OurApproach />
+      <GuidingPillars />
       <CTA />
-      <About />
       <Contact />
+      <Footer />
     </div>
   );
 };

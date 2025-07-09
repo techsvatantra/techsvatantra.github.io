@@ -12,7 +12,6 @@ import NotFoundPage from "@/pages/NotFoundPage";
 import ComingSoonPage from "@/pages/ComingSoonPage";
 import LandingPage from "@/pages/LandingPage";
 import AboutUsPage from "@/pages/AboutUsPage";
-import ServiceAreaPage from "@/pages/ServiceAreaPage";
 import AnimatedLogo from "@/components/AnimatedLogo";
 
 function App() {
@@ -64,6 +63,8 @@ function App() {
     document.title = "e2i home care - Professional Home Care Services";
   }, []);
 
+  const shouldShowFooter = !isLandingPage && location.pathname !== '/services';
+
   return (
     <div className="min-h-screen flex flex-col">
       {!isLandingPage && (
@@ -78,7 +79,7 @@ function App() {
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/about-us" element={<ServiceAreaPage />} />
+          <Route path="/about-us" element={<AboutUsPage />} />
           <Route path="/home" element={<LandingPage />} />
           <Route path="/consultation" element={<ConsultationPage />} />
           <Route path="/services" element={<AllServicesPage />} />
@@ -89,7 +90,7 @@ function App() {
         </Routes>
       </main>
       
-      {!isLandingPage && <Footer />}
+      {shouldShowFooter && <Footer />}
       <Toaster />
       <AnimatePresence>
         {showLogo && <AnimatedLogo />}

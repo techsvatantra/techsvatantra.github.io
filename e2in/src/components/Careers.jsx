@@ -4,7 +4,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { Briefcase, Send, ArrowRight, ArrowLeft } from "lucide-react";
+import { Briefcase, Send, ArrowRight, ArrowLeft, ArrowDown } from "lucide-react";
+import { Link } from "react-router-dom";
 import ProgressIndicator from "@/components/ProgressIndicator";
 import JobOpenings from "./careers/JobOpenings";
 import BasicInfoStep from "./careers/BasicInfoStep";
@@ -52,7 +53,9 @@ const Careers = () => {
     } else {
       setSelectedRole(roleTitle);
       setValue("positionApplyingFor", roleTitle);
-      formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(() => {
+        formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
     }
   };
   
@@ -166,30 +169,34 @@ const Careers = () => {
   };
 
   return (
-    <section id="careers" className="py-20 bg-gradient-to-br from-sky-50 to-blue-100/70">
+    <section id="careers" className="py-20 md:py-28">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+          <Link to="/" className="inline-flex items-center text-sm font-semibold text-white/80 hover:text-white transition-colors mb-6">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Home
+          </Link>
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/10 text-white text-sm font-medium mb-4">
             <Briefcase className="h-5 w-5 mr-2" />
             Join Our Team
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            Make a Difference with <span className="text-primary font-brand">e2i home care</span>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-white">
+            Make a Difference with <span className="font-brand">e2i home care</span>
           </h2>
-          <p className="text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-white/80 max-w-3xl mx-auto">
             We are looking for compassionate and dedicated individuals. Our application process is designed to be straightforward and respectful of your time. Let's start this journey together.
           </p>
         </motion.div>
 
         <JobOpenings selectedRole={selectedRole} onApplyClick={handleApplyClick} />
 
-        <div ref={formRef} className={`max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-2xl border relative transition-all duration-500 ${!selectedRole && 'opacity-50 pointer-events-none'}`}>
+        <div ref={formRef} className={`max-w-4xl mx-auto bg-white/95 backdrop-blur-lg p-8 rounded-xl shadow-2xl border border-white/20 text-foreground transition-all duration-500 ${!selectedRole && 'opacity-50 pointer-events-none'}`}>
            {!selectedRole && (
               <div className="absolute inset-0 bg-white/50 backdrop-blur-sm z-20 flex items-center justify-center rounded-xl">
                   <p className="text-lg font-semibold text-primary">Please select a role above to begin your application.</p>

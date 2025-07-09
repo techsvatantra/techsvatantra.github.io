@@ -1,13 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Heart, Users, Smile, HeartHandshake as Handshake, Home, UserCheck } from 'lucide-react';
 
 const About = () => {
   const benefits = [
     "Relationship-focused matching",
-    "Licensed and certified caregivers", 
+    "Licensed and certified caregivers",
     "Personalized care plans",
     "Regular quality assessments",
     "Continuous caregiver training",
@@ -22,7 +21,7 @@ const About = () => {
     },
     {
       icon: <Handshake className="h-8 w-8 text-primary" />,
-      title: "Connect Compassionately", 
+      title: "Connect Compassionately",
       description: "Fostering genuine, kind, and supportive relationships between clients, caregivers, and our team."
     },
     {
@@ -31,7 +30,7 @@ const About = () => {
       description: "Creating a welcoming space where every individual's background and identity is valued and respected."
     },
     {
-      icon: <Home className="h-8 w-8 text-primary" />,
+      icon: <Home className="h-8 w-8 text-primary" />, 
       title: "Foster Belonging",
       description: "Building a community where clients and caregivers feel like part of our extended family, truly seen and understood."
     }
@@ -107,10 +106,8 @@ const About = () => {
             </div>
             
             <div className="pt-6">
-              <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                <Link to="/consultation">
-                  Get a Free Consultation
-                </Link>
+              <Button size="lg" className="bg-primary hover:bg-primary/90">
+                Learn More About Us
               </Button>
             </div>
           </motion.div>

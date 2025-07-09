@@ -24,8 +24,8 @@ const CTA = () => {
   ];
 
   return (
-    <section className="relative py-20 md:py-28 bg-gradient-to-tr from-primary to-blue-600 text-white overflow-hidden">
-      <div className="absolute inset-0 bg-black/30 z-0"></div>
+    <section className="relative py-20 md:py-28 bg-dark-teal text-white overflow-hidden">
+      <div className="absolute inset-0 bg-black/20 z-0"></div>
       <div className="absolute -bottom-1/4 -left-20 w-72 h-72 bg-white/10 rounded-full opacity-50"></div>
       <div className="absolute -top-1/4 -right-20 w-96 h-96 bg-white/10 rounded-full opacity-50"></div>
       
@@ -40,7 +40,7 @@ const CTA = () => {
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
             Experience Care That Truly Connects
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-blue-100">
+          <p className="max-w-2xl mx-auto text-lg text-teal-100">
             Ready to feel seen, included, and genuinely cared for? Our dedicated coordinators are here to understand your unique needs and find a heart-centered match. Let's start the conversation.
           </p>
         </motion.div>
@@ -67,7 +67,7 @@ const CTA = () => {
                 </div>
               </div>
               <h3 className="text-xl font-semibold mb-1">{stat.value}</h3>
-              <p className="text-sm text-blue-200">{stat.label}</p>
+              <p className="text-sm text-teal-200">{stat.label}</p>
             </motion.div>
           ))}
         </motion.div>
