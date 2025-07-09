@@ -113,6 +113,11 @@ window.fetch = function(...args) {
 		return originalFetch.apply(this, args);
 	}
 
+	// Skip Google Script URLs to avoid CORS errors in console
+    if (url.includes('script.google.com')) {
+        return originalFetch.apply(this, args);
+    }
+
 	return originalFetch.apply(this, args)
 		.then(async response => {
 			const contentType = response.headers.get('Content-Type') || '';

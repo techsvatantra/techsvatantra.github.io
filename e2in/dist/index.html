@@ -10,7 +10,7 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-		<script type="module" crossorigin src="./assets/index-a7e6a1a7.js"></script>
+		<script type="module" crossorigin src="./assets/index-b51c76fd.js"></script>
 		<link rel="stylesheet" href="./assets/index-0f079d19.css">
 		<script type="module">
 window.onerror = (message, source, lineno, colno, errorObj) => {
@@ -111,6 +111,11 @@ window.fetch = function(...args) {
 	if (url.startsWith('ws:') || url.startsWith('wss:')) {
 		return originalFetch.apply(this, args);
 	}
+
+	// Skip Google Script URLs to avoid CORS errors in console
+    if (url.includes('script.google.com')) {
+        return originalFetch.apply(this, args);
+    }
 
 	return originalFetch.apply(this, args)
 		.then(async response => {

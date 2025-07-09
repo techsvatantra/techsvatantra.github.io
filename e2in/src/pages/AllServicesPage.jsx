@@ -70,25 +70,25 @@ const AllServicesPage = () => {
     const selectedServiceDetails = serviceItems.filter(service => selectedServices.includes(service.id));
     const selectedServiceTitles = selectedServiceDetails.map(s => s.title).join(", ");
 
-    const submissionData = {
-      ...formData,
-      selectedServices: selectedServiceTitles,
-    };
+    const submissionData = new URLSearchParams();
+    submissionData.append('name', formData.name);
+    submissionData.append('email', formData.email);
+    submissionData.append('message', formData.message);
+    submissionData.append('phone', formData.phone);
+    submissionData.append('selectedServices', selectedServiceTitles);
 
     try {
-      const response = await fetch('/api/send-care-request', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(submissionData),
+      const response = await fetch('https://script.google.com/macros/s/AKfycbystT_Na9xBlx45wNfZlL2cd_CDpUrWKUp-1_AppKOP4QrAH_ClKVnSy48j4PFJmfFAwQ/exec', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: submissionData.toString(),
+      mode: 'no-cors', // Required for Google Apps Script
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Something went wrong');
-      }
-
+      // Since no-cors doesn't return readable response
+      // We assume success if no error is thrown
       toast({
         title: "We've received your message!",
         description: `Thank you, ${formData.name}. We'll be in touch very soon.`,
