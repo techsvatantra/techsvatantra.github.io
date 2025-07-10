@@ -31354,7 +31354,7 @@ const Careers = () => {
         fileBase64: fileBase64 ? `[Base64 string of length ${fileBase64.length}]` : "EMPTY",
         workHistory: "[JSON string]"
       });
-      const response = await fetch("https://script.google.com/macros/s/AKfycbzamaIgCIVhGhCmwlsGTBcS9Y4BWm496cCtL6RGlHO2E3yd8DAZYgNzPTOCgllvljdkKw/exec", {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbzOtT8xA54Qu2gfxkXIeL5cpZKSt4jb3EvVGP8zJH3i5yEIFimlbbd87cyW5lkH5QuquA/exec", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -32463,4 +32463,4 @@ const index = "";
 client.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(React.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(BrowserRouter, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) }) })
 );
-//# sourceMappingURL=index-0455b8cf.js.map
+//# sourceMappingURL=index-0f563472.js.map
