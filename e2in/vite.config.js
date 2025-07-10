@@ -199,6 +199,9 @@ export default defineConfig(({ mode }) => {
   const isDebug = mode === 'debug';
   
   return {
+    // Use relative paths for assets
+    base: './',
+    
     // Add path alias resolution
     resolve: {
       alias: {
