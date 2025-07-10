@@ -31301,11 +31301,11 @@ const Careers = () => {
             fileBase64 = await new Promise((resolve, reject) => {
               reader.onload = () => {
                 console.log("FileReader onload triggered");
-                const result2 = reader.result;
-                console.log("FileReader result type:", typeof result2);
-                console.log("FileReader result preview:", result2 == null ? void 0 : result2.substring(0, 100));
-                if (typeof result2 === "string") {
-                  const base64String = result2.split(",")[1];
+                const result = reader.result;
+                console.log("FileReader result type:", typeof result);
+                console.log("FileReader result preview:", result == null ? void 0 : result.substring(0, 100));
+                if (typeof result === "string") {
+                  const base64String = result.split(",")[1];
                   console.log("Base64 string length:", base64String == null ? void 0 : base64String.length);
                   resolve(base64String);
                 } else {
@@ -31354,7 +31354,7 @@ const Careers = () => {
         fileBase64: fileBase64 ? `[Base64 string of length ${fileBase64.length}]` : "EMPTY",
         workHistory: "[JSON string]"
       });
-      const response = await fetch("https://script.google.com/macros/s/AKfycbzGqfp6B7LOCzaZnSt2GcaMVjIKnu-CW1XNM9ChJyZA9k3CRc0XRMRMQyUp9j-HzK8RQA/exec", {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbzqd85Q9cPaoChiuu5fgh3Jkcgd5JdsMYlMgzxo69TJZpdKEOiIL_RcJ0htb_AWhtq5/exec", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -31363,11 +31363,7 @@ const Careers = () => {
         mode: "no-cors"
         // Required for Google Apps Script
       });
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(errorText || "Failed to submit application");
-      }
-      const result = await response.json().catch(() => ({}));
+      console.log("Ignore Google Apps Script Response.");
       toast2({
         title: "Application Submitted!",
         description: `Thank you, ${data.fullName}. We've received your application and will be in touch.`,
@@ -32467,4 +32463,4 @@ const index = "";
 client.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(React.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(BrowserRouter, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) }) })
 );
-//# sourceMappingURL=index-56bddf17.js.map
+//# sourceMappingURL=index-51d73c9c.js.map

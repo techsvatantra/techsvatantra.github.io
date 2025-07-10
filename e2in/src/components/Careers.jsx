@@ -58,7 +58,7 @@ const Careers = () => {
       }, 100);
     }
   };
-  
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     console.log('File change event:', file);
@@ -67,25 +67,25 @@ const Careers = () => {
       type: file.type,
       size: file.size
     } : 'No file');
-    
+
     if (file) {
-      setLocalFormData(prev => ({...prev, resumeName: file.name}));
-      setValue("resume", file, { 
+      setLocalFormData(prev => ({ ...prev, resumeName: file.name }));
+      setValue("resume", file, {
         shouldValidate: true,
         shouldDirty: true,
         shouldTouch: true
       });
-      
+
       // Verify it was set
       setTimeout(() => {
         const currentValue = getValues('resume');
         console.log('Form value after setValue:', currentValue);
         console.log('Is current value a File?', currentValue instanceof File);
       }, 100);
-      
+
     } else {
-      setLocalFormData(prev => ({...prev, resumeName: ''}));
-      setValue("resume", null, { 
+      setLocalFormData(prev => ({ ...prev, resumeName: '' }));
+      setValue("resume", null, {
         shouldValidate: true,
         shouldDirty: true,
         shouldTouch: true
@@ -96,12 +96,12 @@ const Careers = () => {
   const nextStep = async () => {
     console.log('Before validation - current form values:', getValues());
     console.log('Resume value before validation:', getValues('resume'));
-    
+
     const isValid = await trigger();
     console.log('Validation result:', isValid);
     console.log('After validation - current form values:', getValues());
     console.log('Resume value after validation:', getValues('resume'));
-    
+
     if (isValid) {
       setCurrentStep(prev => prev < 3 ? prev + 1 : prev);
     }
@@ -119,7 +119,7 @@ const Careers = () => {
     console.log('Local form data:', localFormData);
     console.log('All form values:', getValues());
     console.groupEnd();
-    
+
     setIsLoading(true);
 
     const formData = new FormData();
@@ -132,16 +132,16 @@ const Careers = () => {
         formData.append(key, data[key]);
       }
     });
-    
+
     try {
       // Convert resume file to base64
       let fileBase64 = '';
       let contentType = '';
       let fileName = '';
-      
+
       console.log('Checking resume file:', data.resume);
       console.log('Resume exists?', !!data.resume);
-      
+
       if (data.resume) {
         console.log('Resume file details:', {
           name: data.resume.name,
@@ -149,14 +149,14 @@ const Careers = () => {
           size: data.resume.size,
           lastModified: data.resume.lastModified
         });
-        
+
         // Check if data.resume is actually a File/Blob object
         if (data.resume instanceof File || data.resume instanceof Blob) {
           fileName = data.resume.name || 'resume';
           contentType = data.resume.type || 'application/octet-stream';
-          
+
           console.log('Processing file:', { fileName, contentType });
-          
+
           try {
             // Read the file as base64
             const reader = new FileReader();
@@ -167,7 +167,7 @@ const Careers = () => {
                 const result = reader.result;
                 console.log('FileReader result type:', typeof result);
                 console.log('FileReader result preview:', result?.substring(0, 100));
-                
+
                 if (typeof result === 'string') {
                   const base64String = result.split(',')[1];
                   console.log('Base64 string length:', base64String?.length);
@@ -183,9 +183,9 @@ const Careers = () => {
               console.log('Starting FileReader.readAsDataURL...');
               reader.readAsDataURL(data.resume);
             });
-            
+
             console.log('Final fileBase64 length:', fileBase64?.length);
-            
+
           } catch (fileError) {
             console.error('Error reading file:', fileError);
             throw new Error('Failed to process the resume file. Please try again.');
@@ -198,7 +198,7 @@ const Careers = () => {
       } else {
         console.log('No resume file provided - this might be optional');
       }
-      
+
       // Prepare the payload as expected by the Google Apps Script
       const payload = {
         positionApplyingFor: data.positionApplyingFor,
@@ -218,14 +218,14 @@ const Careers = () => {
         contentType: contentType,
         fileName: fileName
       };
-      
+
       console.log('Final payload:', {
         ...payload,
         fileBase64: fileBase64 ? `[Base64 string of length ${fileBase64.length}]` : 'EMPTY',
         workHistory: '[JSON string]'
       });
       
-      const response = await fetch('https://script.google.com/macros/s/AKfycbzGqfp6B7LOCzaZnSt2GcaMVjIKnu-CW1XNM9ChJyZA9k3CRc0XRMRMQyUp9j-HzK8RQA/exec', {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbzqd85Q9cPaoChiuu5fgh3Jkcgd5JdsMYlMgzxo69TJZpdKEOiIL_RcJ0htb_AWhtq5/exec', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -233,13 +233,8 @@ const Careers = () => {
         body: JSON.stringify(payload),
         mode: 'no-cors', // Required for Google Apps Script
       });
-      
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(errorText || 'Failed to submit application');
-      }
-      
-      const result = await response.json().catch(() => ({}));
+
+      console.log('Ignore Google Apps Script Response.');
 
       toast({
         title: "Application Submitted!",
@@ -288,12 +283,12 @@ const Careers = () => {
   const renderStep = () => {
     switch (currentStep) {
       case 1:
-        return <BasicInfoStep 
+        return <BasicInfoStep
           control={control} // Add this
-          register={register} 
-          errors={errors} 
-          formData={localFormData} 
-          handleFileChange={handleFileChange} 
+          register={register}
+          errors={errors}
+          formData={localFormData}
+          handleFileChange={handleFileChange}
         />;
       case 2:
         return <ExperienceStep control={control} register={register} errors={errors} />;
@@ -333,14 +328,14 @@ const Careers = () => {
         <JobOpenings selectedRole={selectedRole} onApplyClick={handleApplyClick} />
 
         <div ref={formRef} className={`max-w-4xl mx-auto bg-white/95 backdrop-blur-lg p-8 rounded-xl shadow-2xl border border-white/20 text-foreground transition-all duration-500 ${!selectedRole && 'opacity-50 pointer-events-none'}`}>
-           {!selectedRole && (
-              <div className="absolute inset-0 bg-white/50 backdrop-blur-sm z-20 flex items-center justify-center rounded-xl">
-                  <p className="text-lg font-semibold text-primary">Please select a role above to begin your application.</p>
-              </div>
+          {!selectedRole && (
+            <div className="absolute inset-0 bg-white/50 backdrop-blur-sm z-20 flex items-center justify-center rounded-xl">
+              <p className="text-lg font-semibold text-primary">Please select a role above to begin your application.</p>
+            </div>
           )}
-          
+
           <ProgressIndicator currentStep={currentStep} steps={stepNames} />
-          
+
           <form onSubmit={handleSubmit(onSubmit)} className="overflow-hidden relative min-h-[500px]">
             <AnimatePresence mode="wait">
               <motion.div
