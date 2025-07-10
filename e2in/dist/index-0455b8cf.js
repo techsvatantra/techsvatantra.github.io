@@ -20946,7 +20946,7 @@ const AllServicesPage = () => {
     submissionData.append("phone", formData.phone);
     submissionData.append("selectedServices", selectedServiceTitles);
     try {
-      const response = await fetch("https://script.google.com/macros/s/AKfycbystT_Na9xBlx45wNfZlL2cd_CDpUrWKUp-1_AppKOP4QrAH_ClKVnSy48j4PFJmfFAwQ/exec", {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbw2Ti_Uz__9a5Z2gOKskpyYrBSM6AshktjazkfrnZH_7FzZsZh_8TUUAyYsIgg39-A70Q/exec", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
@@ -31354,7 +31354,7 @@ const Careers = () => {
         fileBase64: fileBase64 ? `[Base64 string of length ${fileBase64.length}]` : "EMPTY",
         workHistory: "[JSON string]"
       });
-      const response = await fetch("https://script.google.com/macros/s/AKfycbzqd85Q9cPaoChiuu5fgh3Jkcgd5JdsMYlMgzxo69TJZpdKEOiIL_RcJ0htb_AWhtq5/exec", {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbzamaIgCIVhGhCmwlsGTBcS9Y4BWm496cCtL6RGlHO2E3yd8DAZYgNzPTOCgllvljdkKw/exec", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -31628,7 +31628,7 @@ const Contact = () => {
       formData.append("message", data.message);
       formData.append("timestamp", (/* @__PURE__ */ new Date()).toISOString());
       formData.append("source", "Contact Form");
-      const response = await fetch("https://script.google.com/macros/s/AKfycbzEznK6T8FUwYzUh1XZS0yhg9WfK6jBG9EEQmW1isQJYtyKMZ-h_QAFIKIJ3VykbhSXdA/exec", {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbyHZm7D6uznUuHgmpzVR4H_3-zPNWcWEYvC9hQnSuSrLtAUeCLtB9OI89r-NQdnJETIZg/exec", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
@@ -32463,4 +32463,4 @@ const index = "";
 client.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(React.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(BrowserRouter, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) }) })
 );
-//# sourceMappingURL=index-51d73c9c.js.map
+//# sourceMappingURL=index-0455b8cf.js.map

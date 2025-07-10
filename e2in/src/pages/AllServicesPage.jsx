@@ -78,7 +78,8 @@ const AllServicesPage = () => {
     submissionData.append('selectedServices', selectedServiceTitles);
 
     try {
-      const response = await fetch('https://script.google.com/macros/s/AKfycbystT_Na9xBlx45wNfZlL2cd_CDpUrWKUp-1_AppKOP4QrAH_ClKVnSy48j4PFJmfFAwQ/exec', {
+      // See Project "e2iHealth_Services" here -https://script.google.com/home/projects/15A9FHwijmzqOwHBq1R8HYIf98psCMbmFqDDo8YG-dKt-EfbHAQ3aV_UV/edit
+      const response = await fetch('https://script.google.com/macros/s/AKfycbw2Ti_Uz__9a5Z2gOKskpyYrBSM6AshktjazkfrnZH_7FzZsZh_8TUUAyYsIgg39-A70Q/exec', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',

@@ -30,8 +30,9 @@ const Contact = () => {
       formData.append('timestamp', new Date().toISOString());
       formData.append('source', 'Contact Form');
 
-      // Submit to Google Script using a different approach
-      const response = await fetch('https://script.google.com/macros/s/AKfycbzEznK6T8FUwYzUh1XZS0yhg9WfK6jBG9EEQmW1isQJYtyKMZ-h_QAFIKIJ3VykbhSXdA/exec', {
+      // See Project "e2iHealth_ContactUs" here - https://script.google.com/home/projects/1WoOOrF3xMYZbHAOUvbEdX4VzW3eITvNwtvPmqA4cJ4-TYtGwYlxOF3YD/edit
+      // Submit to Google Script 
+      const response = await fetch('https://script.google.com/macros/s/AKfycbyHZm7D6uznUuHgmpzVR4H_3-zPNWcWEYvC9hQnSuSrLtAUeCLtB9OI89r-NQdnJETIZg/exec', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
