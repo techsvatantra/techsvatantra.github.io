@@ -227,7 +227,7 @@ const Careers = () => {
       
       // Google Apps Script Project - e2iHealth_Careers
       // See Project here - https://script.google.com/home/projects/1_UVXGLJWPtwnqB9dXgp_1i0ypAH_HXonmCoGZm9uD6p9JfrwsF55r15J/edit
-      const response = await fetch('https://script.google.com/macros/s/AKfycbzYZVEGUMpBxylEFf2rqYx7ARkzYQ4koeiL6SyIyLTH7jIuXEB44wNBBD6CrW1gSVTFpQ/exec', {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbwyE-fFO9wJRLeyOGT4vp40xk6h7NJFB3rqvE6KeGZohJEja6C5Li_SmnjOcb9LEu1qaA/exec', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
