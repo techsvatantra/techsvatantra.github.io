@@ -20946,7 +20946,7 @@ const AllServicesPage = () => {
     submissionData.append("phone", formData.phone);
     submissionData.append("selectedServices", selectedServiceTitles);
     try {
-      const response = await fetch("https://script.google.com/macros/s/AKfycbw2Ti_Uz__9a5Z2gOKskpyYrBSM6AshktjazkfrnZH_7FzZsZh_8TUUAyYsIgg39-A70Q/exec", {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbxOBJcFiHtCQEEeNJy_-XhOwn9OHZ1JfUsEe_QJa2E_4fWSSOngWHkHAKpxo4k99l2z/exec", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
@@ -31628,7 +31628,7 @@ const Contact = () => {
       formData.append("message", data.message);
       formData.append("timestamp", (/* @__PURE__ */ new Date()).toISOString());
       formData.append("source", "Contact Form");
-      const response = await fetch("https://script.google.com/macros/s/AKfycbyHZm7D6uznUuHgmpzVR4H_3-zPNWcWEYvC9hQnSuSrLtAUeCLtB9OI89r-NQdnJETIZg/exec", {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbwZtPVPFOdLvC8ETKe02K8ZNXCMQnpXN1GWxtB8leNud2MieZIBQcBw-EFKSlWcyh56GA/exec", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
@@ -32463,4 +32463,4 @@ const index = "";
 client.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(React.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(BrowserRouter, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) }) })
 );
-//# sourceMappingURL=index-aaf43a6b.js.map
+//# sourceMappingURL=index-d89a65bf.js.map

@@ -79,7 +79,7 @@ const AllServicesPage = () => {
 
     try {
       // See Project "e2iHealth_Services" here -https://script.google.com/home/projects/15A9FHwijmzqOwHBq1R8HYIf98psCMbmFqDDo8YG-dKt-EfbHAQ3aV_UV/edit
-      const response = await fetch('https://script.google.com/macros/s/AKfycbw2Ti_Uz__9a5Z2gOKskpyYrBSM6AshktjazkfrnZH_7FzZsZh_8TUUAyYsIgg39-A70Q/exec', {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbxOBJcFiHtCQEEeNJy_-XhOwn9OHZ1JfUsEe_QJa2E_4fWSSOngWHkHAKpxo4k99l2z/exec', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
