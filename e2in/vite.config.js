@@ -226,6 +226,9 @@ export default defineConfig(({ mode }) => {
       minify: isDev || isDebug ? false : 'terser',
       
       rollupOptions: {
+        input: {
+          main: path.resolve(__dirname, 'index.html')
+        },
         output: {
           // Keep readable names in debug mode
           entryFileNames: isDebug ? '[name].js' : '[name]-[hash].js',

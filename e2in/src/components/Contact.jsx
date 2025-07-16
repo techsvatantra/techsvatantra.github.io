@@ -32,20 +32,40 @@ const Contact = () => {
 
       // See Project "e2iHealth_ContactUs" here - https://script.google.com/home/projects/1WoOOrF3xMYZbHAOUvbEdX4VzW3eITvNwtvPmqA4cJ4-TYtGwYlxOF3YD/edit
       // Submit to Google Script 
-      const response = await fetch('https://script.google.com/macros/s/AKfycbwZtPVPFOdLvC8ETKe02K8ZNXCMQnpXN1GWxtB8leNud2MieZIBQcBw-EFKSlWcyh56GA/exec', {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbw_LYA3FVfjt8VTU6qGs9j2p1TRzuFdzlaWJtThdYhzcs6VJdavbGP_xzymGwvCYF5uBA/exec', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: formData.toString(),
-        mode: 'no-cors'
+        // Remove no-cors to read response
       });
       
-      // Since we can't read the response with no-cors, assume success
+      // Check if response is ok
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      // Try to parse JSON response
+      let result;
+      try {
+        result = await response.json();
+      } catch (e) {
+        // If not JSON, get text
+        result = await response.text();
+      }
+      
+      console.log('Google Script response:', result);
+      
+      // Check for success in response
+      if (result.success === false) {
+        throw new Error(result.message || 'Submission failed');
+      }
+      
       // Show success message
       toast({
         title: "Message Sent!",
-        description: "Thank you for contacting us. We'll get back to you shortly.",
+        description: result.message || "Thank you for contacting us. We'll get back to you shortly.",
         duration: 5000,
       });
       
@@ -58,7 +78,7 @@ const Contact = () => {
       // Show error message
       toast({
         title: "Error",
-        description: "There was an error sending your message. Please try again.",
+        description: error.message || "There was an error sending your message. Please try again.",
         variant: "destructive",
         duration: 5000,
       });
