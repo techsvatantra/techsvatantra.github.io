@@ -32,7 +32,7 @@ const Contact = () => {
 
       // See Project "e2iHealth_ContactUs" here - https://script.google.com/home/projects/1WoOOrF3xMYZbHAOUvbEdX4VzW3eITvNwtvPmqA4cJ4-TYtGwYlxOF3YD/edit
       // Submit to Google Script 
-      const response = await fetch('https://script.google.com/macros/s/AKfycbw_LYA3FVfjt8VTU6qGs9j2p1TRzuFdzlaWJtThdYhzcs6VJdavbGP_xzymGwvCYF5uBA/exec', {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbz6GJoNl0kPtas6xvqGW-P9vCtaJesPZDxkEVsnjoEvTx3egD-O0fl3BqnMFdiLE7HnVQ/exec', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',

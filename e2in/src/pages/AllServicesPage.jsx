@@ -79,14 +79,20 @@ const AllServicesPage = () => {
 
     try {
       // See Project "e2iHealth_Services" here -https://script.google.com/home/projects/15A9FHwijmzqOwHBq1R8HYIf98psCMbmFqDDo8YG-dKt-EfbHAQ3aV_UV/edit
-      const response = await fetch('https://script.google.com/macros/s/AKfycbxOBJcFiHtCQEEeNJy_-XhOwn9OHZ1JfUsEe_QJa2E_4fWSSOngWHkHAKpxo4k99l2z/exec', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: submissionData.toString(),
-      mode: 'no-cors', // Required for Google Apps Script
+      const response = await fetch('https://script.google.com/macros/s/AKfycbxC8ZUWCnBvAHP8be9XyJy175VQVdjPYF5G-Zs1S-_kCWml-6azNEJvVVjb5Na3x1b5PQ/exec', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: submissionData.toString(),
       });
+      
+      // Check if the response contains error information
+      const responseData = await response.json();
+      
+      if (responseData.result === 'error') {
+        throw new Error(responseData.message || 'Unknown error occurred');
+      }
 
       // Since no-cors doesn't return readable response
       // We assume success if no error is thrown
