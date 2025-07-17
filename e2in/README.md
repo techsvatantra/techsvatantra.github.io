@@ -17,3 +17,6 @@ npm run build && npm run preview
 
 ## Alternative development build command
 npm run build -- --mode development
+
+## watch changes in debug mode
+npm run build:watch

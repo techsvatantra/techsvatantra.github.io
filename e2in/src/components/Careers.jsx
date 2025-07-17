@@ -225,22 +225,52 @@ const Careers = () => {
         workHistory: '[JSON string]'
       });
       
+      // Option 4: Use same approach as Contact form (form-encoded data)
       // Google Apps Script Project - e2iHealth_Careers
       // See Project here - https://script.google.com/home/projects/1_UVXGLJWPtwnqB9dXgp_1i0ypAH_HXonmCoGZm9uD6p9JfrwsF55r15J/edit
-      const response = await fetch('https://script.google.com/macros/s/AKfycbwyE-fFO9wJRLeyOGT4vp40xk6h7NJFB3rqvE6KeGZohJEja6C5Li_SmnjOcb9LEu1qaA/exec', {
+      
+      // Convert payload to form-encoded format (same as Contact form)
+      const formData = new URLSearchParams();
+      Object.keys(payload).forEach(key => {
+        formData.append(key, payload[key]);
+      });
+      formData.append('timestamp', new Date().toISOString());
+      formData.append('source', 'Careers Form');
+
+      // Send POST request with form-encoded data (CORS should work after GAS update)
+      const response = await fetch('https://script.google.com/macros/s/AKfycbxQBD3bfrxTDtIOPOzHQSDZkfLrOJyeqzPO-kuoab62dggDLJm3GuI_ok18MvkHzavDqQ/exec', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: JSON.stringify(payload),
-        mode: 'no-cors', // Required for Google Apps Script
+        body: formData.toString(),
+        // Remove no-cors after Google Apps Script is updated with CORS headers
       });
 
-      console.log('Ignore Google Apps Script Response.');
+      // Check if response is ok
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      // Parse JSON response
+      let result;
+      try {
+        result = await response.json();
+      } catch (e) {
+        result = await response.text();
+      }
+      
+      console.log('Google Script response:', result);
+      
+      // Check for success in response
+      if (result.status != 'success') {
+        throw new Error(result.message || 'Submission failed');
+      }
 
+      // Show success message with server response
       toast({
         title: "Application Submitted!",
-        description: `Thank you, ${data.fullName}. We've received your application and will be in touch.`,
+        description: result.message || `Thank you, ${data.fullName}. We've received your application and will be in touch.`,
         variant: "success",
       });
 
