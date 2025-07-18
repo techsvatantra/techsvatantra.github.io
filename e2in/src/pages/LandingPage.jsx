@@ -77,12 +77,20 @@ const LandingPage = () => {
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">I am a Care Giver</h1>
             <p className="max-w-md text-lg text-muted-foreground mb-8">We understand that caregiving is personal. That's why we listen to your preferences and help place you where you feel at home</p>
-            <Link to="/careers">
-              <Button size="lg" variant="secondary" className="text-base py-3 px-8 group">
-                View Open Positions
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
+            <div className="flex flex-col gap-4">
+              <Link to="/careers">
+                <Button size="lg" variant="secondary" className="text-base py-3 px-8 group w-full">
+                  View Open Positions
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+              <Link to="/careers-portal">
+                <Button size="lg" variant="outline" className="text-base py-3 px-8 group w-full">
+                  View Open Positions (portal)
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+            </div>
           </motion.div>
         </motion.div>
       </main>
