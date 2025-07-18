@@ -5,10 +5,19 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { PlusCircle, Trash2 } from "lucide-react";
+import { PlusCircle, Trash2, Shield } from "lucide-react";
 import FormError from "./FormError";
+import ReCAPTCHA from "react-google-recaptcha";
 
-const ReviewStep = ({ control, register, errors }) => {
+const ReviewStep = ({ 
+  control, 
+  register, 
+  errors, 
+  recaptchaRef, 
+  recaptchaToken, 
+  handleRecaptchaChange, 
+  handleRecaptchaExpired 
+}) => {
   const { fields, append, remove } = useFieldArray({
     control,
     name: "workHistory",
@@ -74,6 +83,21 @@ const ReviewStep = ({ control, register, errors }) => {
               <Label htmlFor="signature">Typed Signature</Label>
               <Input id="signature" {...register("signature")} placeholder="Type your full name" />
               <FormError message={errors.signature?.message} />
+          </div>
+          
+          {/* reCAPTCHA widget */}
+          <div className="flex flex-col items-center space-y-2 pt-4">
+            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+              <Shield className="h-4 w-4" />
+              <span>Security verification required</span>
+            </div>
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+              onChange={handleRecaptchaChange}
+              onExpired={handleRecaptchaExpired}
+              theme="light"
+            />
           </div>
       </div>
     </div>

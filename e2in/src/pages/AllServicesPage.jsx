@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -6,10 +6,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
-import { Check, Send, User, Phone, Mail, ArrowRight, MessageCircle, ArrowLeft } from "lucide-react";
+import { Check, Send, User, Phone, Mail, ArrowRight, MessageCircle, ArrowLeft, Shield } from "lucide-react";
 import ProgressIndicator from "@/components/ProgressIndicator";
 import Footer from "@/components/Footer";
 import { GOOGLE_APPS_SCRIPT_URLS, createFormData, submitToGoogleScript } from "@/config/googleAppsScript";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const serviceItems = [
   { id: "personal-care", title: "Personal Care", description: "Support with activities of daily living like bathing, dressing, and mobility." },
@@ -27,7 +28,26 @@ const AllServicesPage = () => {
   const [selectedServices, setSelectedServices] = useState([]);
   const [formData, setFormData] = useState({ name: "", phone: "", email: "", message: "" });
   const [isLoading, setIsLoading] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState(null);
+  const recaptchaRef = useRef(null);
   const { toast } = useToast();
+
+  // Get reCAPTCHA site key from environment variables
+  const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+
+  const handleRecaptchaChange = (token) => {
+    setRecaptchaToken(token);
+  };
+
+  const handleRecaptchaExpired = () => {
+    setRecaptchaToken(null);
+    toast({
+      title: "reCAPTCHA Expired",
+      description: "Please complete the reCAPTCHA verification again.",
+      variant: "destructive",
+      duration: 5000,
+    });
+  };
 
   const handleServiceToggle = (serviceId) => {
     setSelectedServices((prev) =>
@@ -66,6 +86,17 @@ const AllServicesPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Check reCAPTCHA validation
+    if (!recaptchaToken) {
+      toast({
+        title: "Security Check Required",
+        description: "Please complete the reCAPTCHA verification.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsLoading(true);
 
     const selectedServiceDetails = serviceItems.filter(service => selectedServices.includes(service.id));
@@ -77,7 +108,8 @@ const AllServicesPage = () => {
       email: formData.email,
       message: formData.message,
       phone: formData.phone,
-      selectedServices: selectedServiceTitles
+      selectedServices: selectedServiceTitles,
+      recaptchaToken: recaptchaToken
     }, 'Services Request');
 
     try {
@@ -102,6 +134,12 @@ const AllServicesPage = () => {
       setSelectedServices([]);
       setFormData({ name: "", phone: "", email: "", message: "" });
       setCurrentStep(1);
+      
+      // Reset reCAPTCHA
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
+      setRecaptchaToken(null);
 
     } catch (error) {
       console.error("Submission failed:", error);
@@ -110,6 +148,12 @@ const AllServicesPage = () => {
         description: "We couldn't send your request. Please try again.",
         variant: "destructive",
       });
+      
+      // Reset reCAPTCHA on error
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
+      setRecaptchaToken(null);
     } finally {
       setIsLoading(false);
     }
@@ -234,11 +278,27 @@ const AllServicesPage = () => {
                   </Label>
                   <Textarea id="message" name="message" placeholder="Feel free to add any other details here." value={formData.message} onChange={handleInputChange} rows={3} className="rounded-lg bg-white/80 focus:bg-white" />
                 </div>
+                
+                {/* reCAPTCHA widget */}
+                <div className="flex flex-col items-center space-y-2">
+                  <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                    <Shield className="h-4 w-4" />
+                    <span>Security verification required</span>
+                  </div>
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                    onChange={handleRecaptchaChange}
+                    onExpired={handleRecaptchaExpired}
+                    theme="light"
+                  />
+                </div>
+                
                 <div className="pt-2 flex items-center gap-4">
                    <Button type="button" variant="outline" onClick={handlePrevStep} className="w-1/3 bg-white/80 hover:bg-white">
                     <ArrowLeft className="mr-2 h-4 w-4" /> Back
                   </Button>
-                  <Button type="submit" className="w-2/3 bg-primary hover:bg-primary/90 text-base py-2 px-4 rounded-md group" disabled={isLoading}>
+                  <Button type="submit" className="w-2/3 bg-primary hover:bg-primary/90 text-base py-2 px-4 rounded-md group" disabled={isLoading || !recaptchaToken}>
                     {isLoading ? <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: "linear" }} className="w-5 h-5 border-2 border-primary-foreground border-t-transparent rounded-full" /> : <>Send My Request <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" /></>}
                   </Button>
                 </div>

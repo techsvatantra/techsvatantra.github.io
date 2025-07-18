@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { Briefcase, Send, ArrowRight, ArrowLeft, ArrowDown } from "lucide-react";
+import { Briefcase, Send, ArrowRight, ArrowLeft, ArrowDown, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import ProgressIndicator from "@/components/ProgressIndicator";
 import JobOpenings from "./careers/JobOpenings";
@@ -14,6 +14,7 @@ import ReviewStep from "./careers/ReviewStep";
 import { stepNames, defaultIssuingAuthority } from "./careers/constants";
 import { careerValidationSchemas } from "@/lib/validation";
 import { GOOGLE_APPS_SCRIPT_URLS, GOOGLE_APPS_SCRIPT_CONFIG } from "@/config/googleAppsScript";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Careers = () => {
   const { toast } = useToast();
@@ -21,7 +22,24 @@ const Careers = () => {
   const [selectedRole, setSelectedRole] = useState(null);
   const [localFormData, setLocalFormData] = useState({ resumeName: '' });
   const [isLoading, setIsLoading] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState(null);
   const formRef = useRef(null);
+  const recaptchaRef = useRef(null);
+
+  // reCAPTCHA handlers
+  const handleRecaptchaChange = (token) => {
+    setRecaptchaToken(token);
+  };
+
+  const handleRecaptchaExpired = () => {
+    setRecaptchaToken(null);
+    toast({
+      title: "reCAPTCHA Expired",
+      description: "Please complete the reCAPTCHA verification again.",
+      variant: "destructive",
+      duration: 5000,
+    });
+  };
 
   const currentValidationSchema = careerValidationSchemas[currentStep - 1];
 
@@ -111,6 +129,16 @@ const Careers = () => {
   const prevStep = () => setCurrentStep(prev => prev > 1 ? prev - 1 : prev);
 
   const onSubmit = async (data) => {
+    // Check reCAPTCHA validation
+    if (!recaptchaToken) {
+      toast({
+        title: "Security Check Required",
+        description: "Please complete the reCAPTCHA verification.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     console.group('Form Submission Debug');
     console.log('Form data:', data);
     console.log('Resume file:', data.resume);
@@ -119,6 +147,7 @@ const Careers = () => {
     console.log('Is Blob?:', data.resume instanceof Blob);
     console.log('Local form data:', localFormData);
     console.log('All form values:', getValues());
+    console.log('reCAPTCHA token:', recaptchaToken);
     console.groupEnd();
 
     setIsLoading(true);
@@ -217,7 +246,8 @@ const Careers = () => {
         signature: data.signature,
         fileBase64: fileBase64,
         contentType: contentType,
-        fileName: fileName
+        fileName: fileName,
+        recaptchaToken: recaptchaToken
       };
 
       console.log('Final payload:', {
@@ -292,6 +322,12 @@ const Careers = () => {
         signature: ""
       });
       setLocalFormData({ resumeName: '' });
+      
+      // Reset reCAPTCHA
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
+      setRecaptchaToken(null);
 
     } catch (error) {
       toast({
@@ -299,6 +335,12 @@ const Careers = () => {
         description: error.message || "There was an issue sending your application. Please try again.",
         variant: "destructive",
       });
+      
+      // Reset reCAPTCHA on error
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
+      setRecaptchaToken(null);
     } finally {
       setIsLoading(false);
     }
@@ -323,7 +365,15 @@ const Careers = () => {
       case 2:
         return <ExperienceStep control={control} register={register} errors={errors} />;
       case 3:
-        return <ReviewStep control={control} register={register} errors={errors} />;
+        return <ReviewStep 
+          control={control} 
+          register={register} 
+          errors={errors} 
+          recaptchaRef={recaptchaRef}
+          recaptchaToken={recaptchaToken}
+          handleRecaptchaChange={handleRecaptchaChange}
+          handleRecaptchaExpired={handleRecaptchaExpired}
+        />;
       default:
         return null;
     }
@@ -397,7 +447,7 @@ const Careers = () => {
                     <ArrowRight className="h-4 w-4 ml-2" />
                   </Button>
                 ) : (
-                  <Button type="submit" className="bg-green-600 hover:bg-green-700" disabled={isLoading}>
+                  <Button type="submit" className="bg-green-600 hover:bg-green-700" disabled={isLoading || !recaptchaToken}>
                     {isLoading ? (
                       <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: "linear" }} className="w-5 h-5 border-2 border-white border-t-transparent rounded-full mr-2" />
                     ) : (
