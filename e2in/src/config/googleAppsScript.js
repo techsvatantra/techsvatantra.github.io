@@ -12,6 +12,7 @@ export const GOOGLE_APPS_SCRIPT_URLS = {
    * Project URL: https://script.google.com/home/projects/1WoOOrF3xMYZbHAOUvbEdX4VzW3eITvNwtvPmqA4cJ4-TYtGwYlxOF3YD/edit
    * Purpose: Handles contact form submissions from the Contact component
    * Used in: src/components/Contact.jsx
+   * Features: Supports reCAPTCHA v2 verification (recaptchaToken field)
    */
   CONTACT_FORM: 'https://script.google.com/macros/s/AKfycbzoPFciR4jRheAb-5dlnx87ozl8e6UMqkPEAzxPLkHlKA2YEzPP_m5EiuCC7jkjC1uwTw/exec',
 

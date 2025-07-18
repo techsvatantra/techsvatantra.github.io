@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -8,8 +8,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Shield } from "lucide-react";
 import { GOOGLE_APPS_SCRIPT_URLS, createFormData, submitToGoogleScript } from "@/config/googleAppsScript";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -17,13 +18,48 @@ const Contact = () => {
     resolver: yupResolver(contactSchema),
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState(null);
+  const recaptchaRef = useRef(null);
+
+  // Get reCAPTCHA site key from environment variables
+  const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+
+  const handleRecaptchaChange = (token) => {
+    setRecaptchaToken(token);
+  };
+
+  const handleRecaptchaExpired = () => {
+    setRecaptchaToken(null);
+    toast({
+      title: "reCAPTCHA Expired",
+      description: "Please complete the reCAPTCHA verification again.",
+      variant: "destructive",
+      duration: 5000,
+    });
+  };
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     
     try {
-      // Create form data using centralized helper
-      const formData = createFormData(data, 'Contact Form');
+      // Check if reCAPTCHA is completed
+      if (!recaptchaToken) {
+        toast({
+          title: "Verification Required",
+          description: "Please complete the reCAPTCHA verification before submitting.",
+          variant: "destructive",
+          duration: 5000,
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Create form data using centralized helper and include reCAPTCHA token
+      const formDataWithRecaptcha = {
+        ...data,
+        recaptchaToken: recaptchaToken
+      };
+      const formData = createFormData(formDataWithRecaptcha, 'Contact Form');
 
       // Submit to Google Script using centralized configuration
       const response = await submitToGoogleScript(GOOGLE_APPS_SCRIPT_URLS.CONTACT_FORM, formData);
@@ -56,11 +92,21 @@ const Contact = () => {
         duration: 5000,
       });
       
-      // Reset form
+      // Reset form and reCAPTCHA
       reset();
+      setRecaptchaToken(null);
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
       
     } catch (error) {
       console.error('Error submitting form:', error);
+      
+      // Reset reCAPTCHA on error
+      setRecaptchaToken(null);
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
       
       // Show error message
       toast({
@@ -183,11 +229,37 @@ const Contact = () => {
                   />
                    {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>}
                 </div>
+
+                {/* reCAPTCHA Section */}
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <Shield className="h-4 w-4 text-primary" />
+                    <Label className="text-sm font-medium">Security Verification</Label>
+                  </div>
+                  <div className="flex justify-center">
+                    {RECAPTCHA_SITE_KEY ? (
+                      <ReCAPTCHA
+                        ref={recaptchaRef}
+                        sitekey={RECAPTCHA_SITE_KEY}
+                        onChange={handleRecaptchaChange}
+                        onExpired={handleRecaptchaExpired}
+                        theme="light"
+                        size="normal"
+                      />
+                    ) : (
+                      <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                        <p className="text-sm text-yellow-800">
+                          reCAPTCHA not configured. Please add VITE_RECAPTCHA_SITE_KEY to your environment variables.
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
                 
                 <Button 
                   type="submit" 
                   className="w-full bg-primary hover:bg-primary/90"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || (!recaptchaToken && RECAPTCHA_SITE_KEY)}
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
