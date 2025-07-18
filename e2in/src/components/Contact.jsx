@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { GOOGLE_APPS_SCRIPT_URLS, createFormData, submitToGoogleScript } from "@/config/googleAppsScript";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -21,25 +22,11 @@ const Contact = () => {
     setIsSubmitting(true);
     
     try {
-      // Create form data as URL-encoded string for Google Scripts
-      const formData = new URLSearchParams();
-      formData.append('name', data.name);
-      formData.append('email', data.email);
-      formData.append('phone', data.phone);
-      formData.append('message', data.message);
-      formData.append('timestamp', new Date().toISOString());
-      formData.append('source', 'Contact Form');
+      // Create form data using centralized helper
+      const formData = createFormData(data, 'Contact Form');
 
-      // See Project "e2iHealth_ContactUs" here - https://script.google.com/home/projects/1WoOOrF3xMYZbHAOUvbEdX4VzW3eITvNwtvPmqA4cJ4-TYtGwYlxOF3YD/edit
-      // Submit to Google Script 
-      const response = await fetch('https://script.google.com/macros/s/AKfycbz6GJoNl0kPtas6xvqGW-P9vCtaJesPZDxkEVsnjoEvTx3egD-O0fl3BqnMFdiLE7HnVQ/exec', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: formData.toString(),
-        // Remove no-cors to read response
-      });
+      // Submit to Google Script using centralized configuration
+      const response = await submitToGoogleScript(GOOGLE_APPS_SCRIPT_URLS.CONTACT_FORM, formData);
       
       // Check if response is ok
       if (!response.ok) {

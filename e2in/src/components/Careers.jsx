@@ -13,6 +13,7 @@ import ExperienceStep from "./careers/ExperienceStep";
 import ReviewStep from "./careers/ReviewStep";
 import { stepNames, defaultIssuingAuthority } from "./careers/constants";
 import { careerValidationSchemas } from "@/lib/validation";
+import { GOOGLE_APPS_SCRIPT_URLS, GOOGLE_APPS_SCRIPT_CONFIG } from "@/config/googleAppsScript";
 
 const Careers = () => {
   const { toast } = useToast();
@@ -225,26 +226,23 @@ const Careers = () => {
         workHistory: '[JSON string]'
       });
       
-      // Option 4: Use same approach as Contact form (form-encoded data)
-      // Google Apps Script Project - e2iHealth_Careers
-      // See Project here - https://script.google.com/home/projects/1_UVXGLJWPtwnqB9dXgp_1i0ypAH_HXonmCoGZm9uD6p9JfrwsF55r15J/edit
-      
-      // Convert payload to form-encoded format (same as Contact form)
+      // Convert payload to form-encoded format using centralized helper
       const formData = new URLSearchParams();
       Object.keys(payload).forEach(key => {
         formData.append(key, payload[key]);
       });
-      formData.append('timestamp', new Date().toISOString());
+      // Add standard fields
+      const standardFields = GOOGLE_APPS_SCRIPT_CONFIG.getStandardFields();
+      Object.keys(standardFields).forEach(key => {
+        formData.append(key, standardFields[key]);
+      });
       formData.append('source', 'Careers Form');
 
-      // Send POST request with form-encoded data (CORS should work after GAS update)
-      const response = await fetch('https://script.google.com/macros/s/AKfycbxQBD3bfrxTDtIOPOzHQSDZkfLrOJyeqzPO-kuoab62dggDLJm3GuI_ok18MvkHzavDqQ/exec', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
+      // Submit to Google Script using centralized configuration
+      const response = await fetch(GOOGLE_APPS_SCRIPT_URLS.CAREERS_APPLICATION, {
+        method: GOOGLE_APPS_SCRIPT_CONFIG.METHOD,
+        headers: GOOGLE_APPS_SCRIPT_CONFIG.HEADERS,
         body: formData.toString(),
-        // Remove no-cors after Google Apps Script is updated with CORS headers
       });
 
       // Check if response is ok

@@ -9,6 +9,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { Check, Send, User, Phone, Mail, ArrowRight, MessageCircle, ArrowLeft } from "lucide-react";
 import ProgressIndicator from "@/components/ProgressIndicator";
 import Footer from "@/components/Footer";
+import { GOOGLE_APPS_SCRIPT_URLS, createFormData, submitToGoogleScript } from "@/config/googleAppsScript";
 
 const serviceItems = [
   { id: "personal-care", title: "Personal Care", description: "Support with activities of daily living like bathing, dressing, and mobility." },
@@ -70,22 +71,18 @@ const AllServicesPage = () => {
     const selectedServiceDetails = serviceItems.filter(service => selectedServices.includes(service.id));
     const selectedServiceTitles = selectedServiceDetails.map(s => s.title).join(", ");
 
-    const submissionData = new URLSearchParams();
-    submissionData.append('name', formData.name);
-    submissionData.append('email', formData.email);
-    submissionData.append('message', formData.message);
-    submissionData.append('phone', formData.phone);
-    submissionData.append('selectedServices', selectedServiceTitles);
+    // Create form data using centralized helper
+    const submissionData = createFormData({
+      name: formData.name,
+      email: formData.email,
+      message: formData.message,
+      phone: formData.phone,
+      selectedServices: selectedServiceTitles
+    }, 'Services Request');
 
     try {
-      // See Project "e2iHealth_Services" here -https://script.google.com/home/projects/15A9FHwijmzqOwHBq1R8HYIf98psCMbmFqDDo8YG-dKt-EfbHAQ3aV_UV/edit
-      const response = await fetch('https://script.google.com/macros/s/AKfycbxC8ZUWCnBvAHP8be9XyJy175VQVdjPYF5G-Zs1S-_kCWml-6azNEJvVVjb5Na3x1b5PQ/exec', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: submissionData.toString(),
-      });
+      // Submit to Google Script using centralized configuration
+      const response = await submitToGoogleScript(GOOGLE_APPS_SCRIPT_URLS.SERVICES_REQUEST, submissionData);
       
       // Check if the response contains error information
       const responseData = await response.json();
