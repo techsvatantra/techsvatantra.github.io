@@ -138,7 +138,7 @@ const Contact = () => {
     {
       icon: <Mail className="h-5 w-5 text-primary" />,
       title: "Email Address",
-      details: "needcare@e2ihomecare.com" 
+      details: "care@e2ihomecare.com" 
     },
     {
       icon: <Clock className="h-5 w-5 text-primary" />,
