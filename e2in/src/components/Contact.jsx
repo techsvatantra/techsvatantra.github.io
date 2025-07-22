@@ -17,6 +17,9 @@ const Contact = () => {
   const { toast } = useToast();
   const { register, handleSubmit, control, formState: { errors }, reset } = useForm({
     resolver: yupResolver(contactSchema),
+    defaultValues: {
+      smsConsent: false
+    }
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState(null);
