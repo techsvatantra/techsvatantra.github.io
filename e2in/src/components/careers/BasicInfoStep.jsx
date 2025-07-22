@@ -1,6 +1,7 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import FormError from "./FormError";
 import { Controller } from "react-hook-form";
 
@@ -31,6 +32,34 @@ const BasicInfoStep = ({ register, errors, formData, handleFileChange, control }
         <Input id="address" {...register("address")} placeholder="Street, City, State, Zip" />
         <FormError message={errors.address?.message} />
       </div>
+      
+      {/* SMS Consent Checkbox */}
+      <div className="space-y-2">
+        <div className="flex items-start space-x-3">
+          <Controller
+            name="smsConsent"
+            control={control}
+            render={({ field }) => (
+              <Checkbox 
+                id="smsConsent" 
+                checked={field.value}
+                onCheckedChange={field.onChange}
+                className="mt-1"
+              />
+            )}
+          />
+          <div className="grid gap-1.5 leading-none">
+            <label 
+              htmlFor="smsConsent" 
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              By sharing your phone number you agree to receive SMS notifications from e2i home care.
+            </label>
+          </div>
+        </div>
+        <FormError message={errors.smsConsent?.message} />
+      </div>
+      
       <div className="space-y-2">
         <Label htmlFor="resume">Resume/CV *</Label>
         <Controller

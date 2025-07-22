@@ -61,7 +61,8 @@ const Careers = () => {
       experienceDuration: "",
       workHistory: [],
       consent: false,
-      signature: ""
+      signature: "",
+      smsConsent: false
     }
   });
 
@@ -319,7 +320,8 @@ const Careers = () => {
         experienceDuration: "",
         workHistory: [],
         consent: false,
-        signature: ""
+        signature: "",
+        smsConsent: false
       });
       setLocalFormData({ resumeName: '' });
       

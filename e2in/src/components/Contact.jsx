@@ -1,12 +1,13 @@
 import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { contactSchema } from "@/lib/validation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/components/ui/use-toast";
 import { MapPin, Phone, Mail, Clock, Shield } from "lucide-react";
 import { GOOGLE_APPS_SCRIPT_URLS, createFormData, submitToGoogleScript } from "@/config/googleAppsScript";
@@ -14,7 +15,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 const Contact = () => {
   const { toast } = useToast();
-  const { register, handleSubmit, formState: { errors }, reset } = useForm({
+  const { register, handleSubmit, control, formState: { errors }, reset } = useForm({
     resolver: yupResolver(contactSchema),
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -228,6 +229,33 @@ const Contact = () => {
                     rows={5}
                   />
                    {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>}
+                </div>
+
+                {/* SMS Consent Checkbox */}
+                <div className="space-y-2">
+                  <div className="flex items-start space-x-3">
+                    <Controller
+                      name="smsConsent"
+                      control={control}
+                      render={({ field }) => (
+                        <Checkbox 
+                          id="smsConsent" 
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                          className="mt-1"
+                        />
+                      )}
+                    />
+                    <div className="grid gap-1.5 leading-none">
+                      <label 
+                        htmlFor="smsConsent" 
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      >
+                        By sharing your phone number you agree to receive SMS notifications from e2i home care.
+                      </label>
+                    </div>
+                  </div>
+                  {errors.smsConsent && <p className="text-red-500 text-xs mt-1">{errors.smsConsent.message}</p>}
                 </div>
 
                 {/* reCAPTCHA Section */}

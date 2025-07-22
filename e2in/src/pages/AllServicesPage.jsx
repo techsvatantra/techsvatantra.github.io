@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/components/ui/use-toast";
 import { Check, Send, User, Phone, Mail, ArrowRight, MessageCircle, ArrowLeft, Shield } from "lucide-react";
 import ProgressIndicator from "@/components/ProgressIndicator";
@@ -26,7 +27,7 @@ const steps = ["Choose Care", "Your Info", "Final Note"];
 const AllServicesPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedServices, setSelectedServices] = useState([]);
-  const [formData, setFormData] = useState({ name: "", phone: "", email: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", phone: "", email: "", message: "", smsConsent: false });
   const [isLoading, setIsLoading] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState(null);
   const recaptchaRef = useRef(null);
@@ -58,8 +59,18 @@ const AllServicesPage = () => {
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({ 
+      ...prev, 
+      [name]: type === 'checkbox' ? checked : value 
+    }));
+  };
+
+  const handleSmsConsentChange = (checked) => {
+    setFormData((prev) => ({ 
+      ...prev, 
+      smsConsent: checked 
+    }));
   };
 
   const handleNextStep = () => {
@@ -74,6 +85,10 @@ const AllServicesPage = () => {
       }
       if (!formData.phone && !formData.email) {
         toast({ title: "How can we reach you?", description: "Please provide either a phone number or an email address.", variant: "destructive" });
+        return;
+      }
+      if (formData.phone && !formData.smsConsent) {
+        toast({ title: "SMS Consent Required", description: "Please agree to receive SMS notifications to continue.", variant: "destructive" });
         return;
       }
     }
@@ -132,7 +147,7 @@ const AllServicesPage = () => {
       });
       
       setSelectedServices([]);
-      setFormData({ name: "", phone: "", email: "", message: "" });
+      setFormData({ name: "", phone: "", email: "", message: "", smsConsent: false });
       setCurrentStep(1);
       
       // Reset reCAPTCHA
@@ -248,6 +263,29 @@ const AllServicesPage = () => {
                   </div>
                 </div>
               </div>
+              
+              {/* SMS Consent Checkbox - only show if phone number is provided */}
+              {formData.phone && (
+                <div className="space-y-2">
+                  <div className="flex items-start space-x-3">
+                    <Checkbox 
+                      id="smsConsent" 
+                      checked={formData.smsConsent}
+                      onCheckedChange={handleSmsConsentChange}
+                      className="mt-1"
+                    />
+                    <div className="grid gap-1.5 leading-none">
+                      <label 
+                        htmlFor="smsConsent" 
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      >
+                        By sharing your phone number you agree to receive SMS notifications from e2i home care.
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              )}
+              
               <div className="pt-6 flex items-center gap-4">
                  <Button type="button" variant="outline" onClick={handlePrevStep} className="w-1/3 bg-white/80 hover:bg-white">
                     <ArrowLeft className="mr-2 h-4 w-4" /> Back
