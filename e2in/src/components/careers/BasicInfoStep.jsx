@@ -53,7 +53,7 @@ const BasicInfoStep = ({ register, errors, formData, handleFileChange, control }
               htmlFor="smsConsent" 
               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
-              By sharing your phone number you agree to receive SMS notifications from e2i home care.
+              By sharing your phone number you agree to receive SMS notifications from <b>e2i home care.</b>
             </label>
           </div>
         </div>
