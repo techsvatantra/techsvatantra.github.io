@@ -8,7 +8,6 @@ import ConsultationPage from "@/pages/ConsultationPage";
 import AllServicesPage from "@/pages/AllServicesPage";
 import TrainingPage from "@/pages/TrainingPage";
 import CareersPage from "@/pages/CareersPage"; 
-import CareersPortalPage from "@/pages/CareersPortalPage";
 import NotFoundPage from "@/pages/NotFoundPage";
 import ComingSoonPage from "@/pages/ComingSoonPage";
 import LandingPage from "@/pages/LandingPage";
@@ -87,7 +86,6 @@ function App() {
           <Route path="/services" element={<AllServicesPage />} />
           <Route path="/training" element={<TrainingPage />} />
           <Route path="/careers" element={<CareersPage />} /> 
-          <Route path="/careers-portal" element={<CareersPortalPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/coming-soon" element={<ComingSoonPage />} />
           <Route path="*" element={<NotFoundPage />} />

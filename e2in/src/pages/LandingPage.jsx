@@ -84,12 +84,6 @@ const LandingPage = () => {
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>
-              <Link to="/careers-portal">
-                <Button size="lg" variant="outline" className="text-base py-3 px-8 group w-full">
-                  View Open Positions (portal)
-                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </Link>
             </div>
           </motion.div>
         </motion.div>
