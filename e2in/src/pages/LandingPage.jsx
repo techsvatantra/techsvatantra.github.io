@@ -57,7 +57,7 @@ const LandingPage = () => {
               </Link>
               <div className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-base font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white/20 text-white h-12 py-3 px-8 group w-full sm:w-auto">
                   <Phone className="mr-2 h-5 w-5" />
-                  443-333-9645
+                  609-360-6020
               </div>
             </div>
           </motion.div>

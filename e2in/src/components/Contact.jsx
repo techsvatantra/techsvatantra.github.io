@@ -130,7 +130,7 @@ const Contact = () => {
     {
       icon: <Phone className="h-5 w-5 text-primary" />,
       title: "Phone Number",
-      details: "443-333-9645"
+      details: "609-360-6020"
     },
     {
       icon: <Mail className="h-5 w-5 text-primary" />,
