@@ -264,27 +264,25 @@ const AllServicesPage = () => {
                 </div>
               </div>
               
-              {/* SMS Consent Checkbox - only show if phone number is provided */}
-              {formData.phone && (
-                <div className="space-y-2">
-                  <div className="flex items-start space-x-3">
-                    <Checkbox 
-                      id="smsConsent" 
-                      checked={formData.smsConsent}
-                      onCheckedChange={handleSmsConsentChange}
-                      className="mt-1"
-                    />
-                    <div className="grid gap-1.5 leading-none">
-                      <label 
-                        htmlFor="smsConsent" 
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
-                        By sharing your phone number you agree to receive SMS notifications from e2i home care.
-                      </label>
-                    </div>
+              {/* SMS Consent Checkbox */}
+              <div className="space-y-2">
+                <div className="flex items-start space-x-3">
+                  <Checkbox 
+                    id="smsConsent" 
+                    checked={formData.smsConsent}
+                    onCheckedChange={handleSmsConsentChange}
+                    className="mt-1"
+                  />
+                  <div className="grid gap-1.5 leading-none">
+                    <label 
+                      htmlFor="smsConsent" 
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      By sharing your phone number you agree to receive SMS notifications from e2i home care.
+                    </label>
                   </div>
                 </div>
-              )}
+              </div>
               
               <div className="pt-6 flex items-center gap-4">
                  <Button type="button" variant="outline" onClick={handlePrevStep} className="w-1/3 bg-white/80 hover:bg-white">
