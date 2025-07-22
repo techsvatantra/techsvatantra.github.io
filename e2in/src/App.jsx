@@ -13,6 +13,7 @@ import NotFoundPage from "@/pages/NotFoundPage";
 import ComingSoonPage from "@/pages/ComingSoonPage";
 import LandingPage from "@/pages/LandingPage";
 import AboutUsPage from "@/pages/AboutUsPage";
+import PrivacyPolicyPage from "@/pages/PrivacyPolicyPage";
 import AnimatedLogo from "@/components/AnimatedLogo";
 
 function App() {
@@ -87,6 +88,7 @@ function App() {
           <Route path="/training" element={<TrainingPage />} />
           <Route path="/careers" element={<CareersPage />} /> 
           <Route path="/careers-portal" element={<CareersPortalPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/coming-soon" element={<ComingSoonPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

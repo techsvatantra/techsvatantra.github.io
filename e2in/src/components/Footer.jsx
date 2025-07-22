@@ -49,7 +49,7 @@ const Footer = () => {
         { name: "Contact Us", href: "/#contact", type: "hash" },
         { name: "FAQs", href: "/coming-soon", type: "route" },
         { name: "Resources", href: "/coming-soon", type: "route" },
-        { name: "Privacy Policy", href: "/coming-soon", type: "route" },
+        { name: "Privacy Policy", href: "/privacy-policy", type: "route" },
         { name: "Terms of Service", href: "/coming-soon", type: "route" }
       ]
     }
@@ -132,7 +132,7 @@ const Footer = () => {
               </p>
             </div>
             <div className="flex flex-col md:flex-row md:justify-end space-y-4 md:space-y-0 md:space-x-4">
-              <Link to="/coming-soon" className="text-gray-400 hover:text-primary text-sm">
+              <Link to="/privacy-policy" className="text-gray-400 hover:text-primary text-sm">
                 Privacy Policy
               </Link>
               <Link to="/coming-soon" className="text-gray-400 hover:text-primary text-sm">
