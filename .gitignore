@@ -25,3 +25,4 @@ hs_err_pid*
 replay_pid*
 /e2in/node_modules
 
+e2in/.env
