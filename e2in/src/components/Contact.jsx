@@ -254,7 +254,7 @@ const Contact = () => {
                         htmlFor="smsConsent" 
                         className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                       >
-                        By sharing your phone number you agree to receive SMS notifications from <b>e2i home care.</b>
+                        By providing a telephone number and submitting this form you are consenting to be contacted by SMS text message. Message & data rates may apply. You can reply STOP to opt-out of further messaging.
                       </label>
                     </div>
                   </div>
