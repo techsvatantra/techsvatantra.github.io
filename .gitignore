@@ -26,3 +26,5 @@ replay_pid*
 /e2in/node_modules
 
 e2in/.env
+e2in/.env
+e2in/.env.development
