@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -25,6 +25,16 @@ const Careers = () => {
   const [recaptchaToken, setRecaptchaToken] = useState(null);
   const formRef = useRef(null);
   const recaptchaRef = useRef(null);
+
+  // Development mode flag
+  const isRecaptchaDisabled = import.meta.env.VITE_DISABLE_RECAPTCHA === 'true';
+
+  // Auto-set recaptcha token in development mode
+  useEffect(() => {
+    if (isRecaptchaDisabled) {
+      setRecaptchaToken('dev-mode-bypass');
+    }
+  }, [isRecaptchaDisabled]);
 
   // reCAPTCHA handlers
   const handleRecaptchaChange = (token) => {
@@ -245,6 +255,7 @@ const Careers = () => {
         workHistory: JSON.stringify(data.workHistory),
         consent: data.consent,
         signature: data.signature,
+        smsConsent: data.smsConsent,
         fileBase64: fileBase64,
         contentType: contentType,
         fileName: fileName,
@@ -375,6 +386,7 @@ const Careers = () => {
           recaptchaToken={recaptchaToken}
           handleRecaptchaChange={handleRecaptchaChange}
           handleRecaptchaExpired={handleRecaptchaExpired}
+          isRecaptchaDisabled={isRecaptchaDisabled}
         />;
       default:
         return null;

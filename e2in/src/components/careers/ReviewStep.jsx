@@ -16,7 +16,8 @@ const ReviewStep = ({
   recaptchaRef, 
   recaptchaToken, 
   handleRecaptchaChange, 
-  handleRecaptchaExpired 
+  handleRecaptchaExpired,
+  isRecaptchaDisabled = false
 }) => {
   const { fields, append, remove } = useFieldArray({
     control,
@@ -89,15 +90,23 @@ const ReviewStep = ({
           <div className="flex flex-col items-center space-y-2 pt-4">
             <div className="flex items-center space-x-2 text-sm text-muted-foreground">
               <Shield className="h-4 w-4" />
-              <span>Security verification required</span>
+              <span>Security verification {isRecaptchaDisabled ? '(disabled in dev mode)' : 'required'}</span>
             </div>
-            <ReCAPTCHA
-              ref={recaptchaRef}
-              sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-              onChange={handleRecaptchaChange}
-              onExpired={handleRecaptchaExpired}
-              theme="light"
-            />
+            {isRecaptchaDisabled ? (
+              <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+                <p className="text-sm text-green-800">
+                  🚀 Development Mode: reCAPTCHA is disabled for faster testing
+                </p>
+              </div>
+            ) : (
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                onChange={handleRecaptchaChange}
+                onExpired={handleRecaptchaExpired}
+                theme="light"
+              />
+            )}
           </div>
       </div>
     </div>

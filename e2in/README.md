@@ -3,14 +3,8 @@
 ## Production build (default)
 npm run build
 
-## Development build (unminified, with source maps)
-npm run build:dev
-
-## Debug build (readable names, no hashes)
-npm run build:debug
-
 ## Build and serve to test
 npm run build && npm run preview
 
-## watch changes in debug mode
-npm run build:watch
+## watch changes in debug mode, it runs a development build by default and disables captcha, see .env.development file
+npm run build:watch 

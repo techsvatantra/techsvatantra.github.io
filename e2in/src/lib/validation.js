@@ -7,7 +7,7 @@ export const contactSchema = yup.object().shape({
   email: yup.string().email('Invalid email address').required('Email is required'),
   phone: yup.string().matches(phoneRegExp, 'Phone number is not valid').required('Phone number is required'),
   message: yup.string().required('Message is required').min(10, 'Message must be at least 10 characters long'),
-  smsConsent: yup.boolean().oneOf([true], 'You must agree to receive SMS notifications to submit this form'),
+  smsConsent: yup.boolean(),
 });
 
 const basicInfoSchema = yup.object({
@@ -20,7 +20,7 @@ const basicInfoSchema = yup.object({
       if (!value) return false;
       return value instanceof File;
     }),
-  smsConsent: yup.boolean().oneOf([true], 'You must agree to receive SMS notifications to submit this form'),
+  smsConsent: yup.boolean(),
 });
 
 const experienceSchema = yup.object({

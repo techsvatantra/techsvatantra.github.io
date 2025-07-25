@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -25,8 +25,16 @@ const Contact = () => {
   const [recaptchaToken, setRecaptchaToken] = useState(null);
   const recaptchaRef = useRef(null);
 
-  // Get reCAPTCHA site key from environment variables
+  // Get reCAPTCHA site key and development mode flag from environment variables
   const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+  const isRecaptchaDisabled = import.meta.env.VITE_DISABLE_RECAPTCHA === 'true';
+
+  // Auto-set recaptcha token in development mode
+  useEffect(() => {
+    if (isRecaptchaDisabled) {
+      setRecaptchaToken('dev-mode-bypass');
+    }
+  }, [isRecaptchaDisabled]);
 
   const handleRecaptchaChange = (token) => {
     setRecaptchaToken(token);
@@ -252,9 +260,15 @@ const Contact = () => {
                     <div className="grid gap-1.5 leading-none">
                       <label 
                         htmlFor="smsConsent" 
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        className="leading-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        style={{ fontSize: '10px' }}
                       >
-                        By providing a telephone number and submitting this form you are consenting to be contacted by SMS text message. Message & data rates may apply. You can reply STOP to opt-out of further messaging.
+                        <div className="space-y-1">
+                          <p>By providing a telephone number and submitting this form you are consenting to be contacted by SMS text message. Message & data rates may apply. Message frequency may vary. Reply Help for more information. You can reply STOP to opt-out of further messaging.</p>
+                          <p>To view our policy, visit <a href="https://e2ihomecare.com/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">https://e2ihomecare.com/privacy-policy</a>.</p>
+                          <p>No mobile information will be shared with third parties/affiliates for marketing/promotional purposes. All other categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</p>
+                          <p>Your privacy is our priority, and we ensure that your consent to receive text messages and any related data remains confidential and is not used for any other purpose.</p>
+                        </div>
                       </label>
                     </div>
                   </div>
@@ -268,7 +282,13 @@ const Contact = () => {
                     <Label className="text-sm font-medium">Security Verification</Label>
                   </div>
                   <div className="flex justify-center">
-                    {RECAPTCHA_SITE_KEY ? (
+                    {isRecaptchaDisabled ? (
+                      <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+                        <p className="text-sm text-green-800">
+                          🚀 Development Mode: reCAPTCHA is disabled for faster testing
+                        </p>
+                      </div>
+                    ) : RECAPTCHA_SITE_KEY ? (
                       <ReCAPTCHA
                         ref={recaptchaRef}
                         sitekey={RECAPTCHA_SITE_KEY}

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -33,8 +33,16 @@ const AllServicesPage = () => {
   const recaptchaRef = useRef(null);
   const { toast } = useToast();
 
-  // Get reCAPTCHA site key from environment variables
+  // Get reCAPTCHA site key and development mode flag from environment variables
   const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+  const isRecaptchaDisabled = import.meta.env.VITE_DISABLE_RECAPTCHA === 'true';
+
+  // Auto-set recaptcha token in development mode
+  useEffect(() => {
+    if (isRecaptchaDisabled) {
+      setRecaptchaToken('dev-mode-bypass');
+    }
+  }, [isRecaptchaDisabled]);
 
   const handleRecaptchaChange = (token) => {
     setRecaptchaToken(token);
@@ -87,10 +95,6 @@ const AllServicesPage = () => {
         toast({ title: "How can we reach you?", description: "Please provide either a phone number or an email address.", variant: "destructive" });
         return;
       }
-      if (formData.phone && !formData.smsConsent) {
-        toast({ title: "SMS Consent Required", description: "Please consent to SMS contact to continue.", variant: "destructive" });
-        return;
-      }
     }
     setCurrentStep((prev) => prev + 1);
   };
@@ -124,6 +128,7 @@ const AllServicesPage = () => {
       message: formData.message,
       phone: formData.phone,
       selectedServices: selectedServiceTitles,
+      smsConsent: formData.smsConsent,
       recaptchaToken: recaptchaToken
     }, 'Services Request');
 
@@ -276,9 +281,15 @@ const AllServicesPage = () => {
                   <div className="grid gap-1.5 leading-none">
                     <label 
                       htmlFor="smsConsent" 
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      className="leading-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      style={{ fontSize: '10px' }}
                     >
-                      By providing a telephone number and submitting this form you are consenting to be contacted by SMS text message. Message & data rates may apply. You can reply STOP to opt-out of further messaging.
+                      <div className="space-y-1">
+                        <p>By providing a telephone number and submitting this form you are consenting to be contacted by SMS text message. Message & data rates may apply. Message frequency may vary. Reply Help for more information. You can reply STOP to opt-out of further messaging.</p>
+                        <p>To view our policy, visit <a href="https://e2ihomecare.com/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">https://e2ihomecare.com/privacy-policy</a>.</p>
+                        <p>No mobile information will be shared with third parties/affiliates for marketing/promotional purposes. All other categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</p>
+                        <p>Your privacy is our priority, and we ensure that your consent to receive text messages and any related data remains confidential and is not used for any other purpose.</p>
+                      </div>
                     </label>
                   </div>
                 </div>
@@ -319,15 +330,23 @@ const AllServicesPage = () => {
                 <div className="flex flex-col items-center space-y-2">
                   <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                     <Shield className="h-4 w-4" />
-                    <span>Security verification required</span>
+                    <span>Security verification {isRecaptchaDisabled ? '(disabled in dev mode)' : 'required'}</span>
                   </div>
-                  <ReCAPTCHA
-                    ref={recaptchaRef}
-                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-                    onChange={handleRecaptchaChange}
-                    onExpired={handleRecaptchaExpired}
-                    theme="light"
-                  />
+                  {isRecaptchaDisabled ? (
+                    <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+                      <p className="text-sm text-green-800">
+                        🚀 Development Mode: reCAPTCHA is disabled for faster testing
+                      </p>
+                    </div>
+                  ) : (
+                    <ReCAPTCHA
+                      ref={recaptchaRef}
+                      sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                      onChange={handleRecaptchaChange}
+                      onExpired={handleRecaptchaExpired}
+                      theme="light"
+                    />
+                  )}
                 </div>
                 
                 <div className="pt-2 flex items-center gap-4">

@@ -8,7 +8,7 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "build:debug": "vite build --mode debug",
-    "build:watch": "vite build --watch",
+    "build:watch": "vite build --watch --mode development",
     "build:watch:dev": "vite build --watch --mode development",
     "dev:build": "concurrently \"npm run dev\" \"npm run build:watch:dev\"",
     "preview": "vite preview",
