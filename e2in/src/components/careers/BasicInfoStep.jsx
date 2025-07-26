@@ -55,7 +55,7 @@ const BasicInfoStep = ({ register, errors, formData, handleFileChange, control }
               style={{ fontSize: '10px' }}
             >
               <div className="space-y-1">
-                <p>By providing a telephone number and submitting this form you are consenting to be contacted by SMS text message. Message & data rates may apply. Message frequency may vary. Reply Help for more information. You can reply STOP to opt-out of further messaging.</p>
+                <p>By providing a telephone number and submitting this form you are consenting to be contacted by SMS text message from <b>e2i Home Care</b>. Message & data rates may apply. Message frequency may vary. Reply Help for more information. You can reply STOP to opt-out of further messaging.</p>
                 <p>To view our policy, visit <a href="https://e2ihomecare.com/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">https://e2ihomecare.com/privacy-policy</a>.</p>
                 <p>No mobile information will be shared with third parties/affiliates for marketing/promotional purposes. All other categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</p>
                 <p>Your privacy is our priority, and we ensure that your consent to receive text messages and any related data remains confidential and is not used for any other purpose.</p>
