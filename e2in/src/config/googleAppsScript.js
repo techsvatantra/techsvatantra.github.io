@@ -14,7 +14,7 @@ export const GOOGLE_APPS_SCRIPT_URLS = {
    * Used in: src/components/Contact.jsx
    * Features: Supports reCAPTCHA v2 verification (recaptchaToken field)
    */
-  CONTACT_FORM: 'https://script.google.com/macros/s/AKfycbwOYlwNun_aYtHmzMCvSuvrN3EELelomGDaUVhfKiDGKIpH2ps6Jx9yokKqkve9hxHa/exec',
+  CONTACT_FORM: 'https://script.google.com/macros/s/AKfycbyzNk8QK55YaO4IC9Mj_GFUxH8kixYS7VSGfLoU64auvmOYx9mlkwAq9dsmk5_PmHeirQ/exec',
 
   /**
    * Services Request Form
@@ -23,7 +23,7 @@ export const GOOGLE_APPS_SCRIPT_URLS = {
    * Purpose: Handles service request submissions from the All Services page
    * Used in: src/pages/AllServicesPage.jsx
    */
-  SERVICES_REQUEST: 'https://script.google.com/macros/s/AKfycbzjIxxwYCxIGg-5XmCjVt4HcdJGzfIJjc9ttetkOPsBwvDZ4wU4R2p6hRDKs4qK_LEOSw/exec',
+  SERVICES_REQUEST: 'https://script.google.com/macros/s/AKfycbx6ZOfmoUxQwVwXqvEyFAMs_Y6dZpDIU9UBjdcjUcMOiATHDyPNIVtaxz8ItHIAiEqREg/exec',
 
   /**
    * Careers/Job Application Form
@@ -33,7 +33,7 @@ export const GOOGLE_APPS_SCRIPT_URLS = {
    * Used in: src/components/Careers.jsx
    * Note: Supports file uploads (resume) via base64 encoding
    */
-  CAREERS_APPLICATION: 'https://script.google.com/macros/s/AKfycbwjNjVDKyn-80h0d_g6W872cQmLU4pi55Cq0Vb_5muxkMSW1ncwD_ieJuagfGQGWT_3cA/exec',
+  CAREERS_APPLICATION: 'https://script.google.com/macros/s/AKfycbxyyImJyW6VjNTfAeJDhXyIsXEuqRidBXVGoChcz99_EhRT-1L5zh-eomUPyD0HMkA0/exec',
 };
 
 /**
