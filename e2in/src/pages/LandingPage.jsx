@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, UserPlus, HeartHandshake, Info, Phone } from 'lucide-react';
+import { ArrowRight, UserPlus, HeartHandshake, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CTA from '@/components/CTA';
 import Contact from '@/components/Contact';
@@ -22,14 +22,6 @@ const LandingPage = () => {
 
   return (
     <div className="bg-background relative">
-      <div className="absolute top-4 right-4 z-20">
-        <Link to="/about-us">
-          <Button variant="outline" className="bg-white/90 backdrop-blur-sm hover:bg-white text-foreground hover:text-primary border-gray-200 shadow-sm">
-            <Info className="mr-2 h-4 w-4" />
-            About & Service Areas
-          </Button>
-        </Link>
-      </div>
 
       <main className="flex flex-col md:flex-row min-h-screen">
         {/* Left Panel: I Need Care */}
