@@ -20173,36 +20173,6 @@ const Home = createLucideIcon("Home", [
   ],
   ["polyline", { points: "9 22 9 12 15 12 15 22", key: "e2us08" }]
 ]);
-const Instagram = createLucideIcon("Instagram", [
-  [
-    "rect",
-    {
-      width: "20",
-      height: "20",
-      x: "2",
-      y: "2",
-      rx: "5",
-      ry: "5",
-      key: "2e1cvw"
-    }
-  ],
-  [
-    "path",
-    { d: "M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z", key: "9exkf1" }
-  ],
-  ["line", { x1: "17.5", x2: "17.51", y1: "6.5", y2: "6.5", key: "r4j83e" }]
-]);
-const Linkedin = createLucideIcon("Linkedin", [
-  [
-    "path",
-    {
-      d: "M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z",
-      key: "c2jq9f"
-    }
-  ],
-  ["rect", { width: "4", height: "12", x: "2", y: "9", key: "mk3on5" }],
-  ["circle", { cx: "4", cy: "4", r: "2", key: "bt5ra8" }]
-]);
 const Mail = createLucideIcon("Mail", [
   [
     "rect",
@@ -20260,15 +20230,6 @@ const Trash2 = createLucideIcon("Trash2", [
   ["path", { d: "M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2", key: "v07s0e" }],
   ["line", { x1: "10", x2: "10", y1: "11", y2: "17", key: "1uufr5" }],
   ["line", { x1: "14", x2: "14", y1: "11", y2: "17", key: "xtxkd" }]
-]);
-const Twitter = createLucideIcon("Twitter", [
-  [
-    "path",
-    {
-      d: "M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z",
-      key: "pff0z6"
-    }
-  ]
 ]);
 const UserPlus = createLucideIcon("UserPlus", [
   ["path", { d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2", key: "1yyitq" }],
@@ -20622,10 +20583,7 @@ const Footer = () => {
     }
   ];
   const socialLinks = [
-    { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Facebook, { className: "h-5 w-5" }), href: "javascript:void(0);" },
-    { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Twitter, { className: "h-5 w-5" }), href: "javascript:void(0);" },
-    { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Instagram, { className: "h-5 w-5" }), href: "javascript:void(0);" },
-    { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Linkedin, { className: "h-5 w-5" }), href: "javascript:void(0);" }
+    { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Facebook, { className: "h-5 w-5" }), href: "https://www.facebook.com/share/1Ewed65ri1/?mibextid=wwXIfr" }
   ];
   return /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "bg-gray-900 text-white pt-16 pb-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "container mx-auto px-4 md:px-6", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12", children: [
@@ -33559,4 +33517,4 @@ const index = "";
 client.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(React.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(BrowserRouter, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) }) })
 );
-//# sourceMappingURL=main-a815e9da.js.map
+//# sourceMappingURL=main-8bb60bb5.js.map
