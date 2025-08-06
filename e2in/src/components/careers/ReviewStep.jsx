@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useFieldArray, Controller } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -5,28 +6,18 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { PlusCircle, Trash2, Shield } from "lucide-react";
+import { PlusCircle, Trash2, ShieldCheck } from "lucide-react";
 import FormError from "./FormError";
-import ReCAPTCHA from "react-google-recaptcha";
 
-const ReviewStep = ({ 
-  control, 
-  register, 
-  errors, 
-  recaptchaRef, 
-  recaptchaToken, 
-  handleRecaptchaChange, 
-  handleRecaptchaExpired,
-  isRecaptchaDisabled = false
-}) => {
+const ReviewStep = ({ control, register, errors }) => {
   const { fields, append, remove } = useFieldArray({
     control,
     name: "workHistory",
   });
 
   return (
-    <div className="space-y-6">
-      <h3 className="text-xl font-semibold text-primary mb-6">Step 3: Work History & Consent</h3>
+    <div className="space-y-8">
+      <h3 className="text-xl font-semibold text-primary mb-6">Step 4: Work History & Consents</h3>
       <div className="space-y-4">
         <Label>Previous Employers (Optional, up to 5)</Label>
         {fields.map((item, index) => (
@@ -61,7 +52,8 @@ const ReviewStep = ({
           </Button>
         )}
       </div>
-       <div className="space-y-4 pt-4 border-t">
+
+       <div className="space-y-6 pt-6 border-t">
           <div className="flex items-start space-x-3">
               <Controller
                 name="consent"
@@ -71,42 +63,40 @@ const ReviewStep = ({
                 )}
               />
               <div className="grid gap-1.5 leading-none">
-                  <label htmlFor="consent" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                  <Label htmlFor="consent" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                       I hereby certify that the information provided is true and complete.
-                  </label>
+                  </Label>
                   <p className="text-sm text-muted-foreground">
                       I understand that any false information may result in the rejection of my application or termination of employment.
                   </p>
               </div>
           </div>
-           <FormError message={errors.consent?.message} />
+          <FormError message={errors.consent?.message} />
+
+          <div className="flex items-start space-x-3 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+             <ShieldCheck className="h-5 w-5 text-blue-600 mt-1 flex-shrink-0" />
+              <div className="flex-grow">
+                 <Controller
+                    name="backgroundCheckConsent"
+                    control={control}
+                    render={({ field }) => (
+                       <Checkbox id="backgroundCheckConsent" checked={field.value} onCheckedChange={field.onChange} className="mr-3" />
+                    )}
+                  />
+                  <Label htmlFor="backgroundCheckConsent" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                      Authorization for Background Check
+                  </Label>
+                  <p className="text-xs text-muted-foreground mt-2">
+                      I authorize e2i home care to conduct a criminal background check as part of my application process.
+                  </p>
+              </div>
+          </div>
+          <FormError message={errors.backgroundCheckConsent?.message} />
+
           <div>
               <Label htmlFor="signature">Typed Signature</Label>
               <Input id="signature" {...register("signature")} placeholder="Type your full name" />
               <FormError message={errors.signature?.message} />
-          </div>
-          
-          {/* reCAPTCHA widget */}
-          <div className="flex flex-col items-center space-y-2 pt-4">
-            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-              <Shield className="h-4 w-4" />
-              <span>Security verification {isRecaptchaDisabled ? '(disabled in dev mode)' : 'required'}</span>
-            </div>
-            {isRecaptchaDisabled ? (
-              <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-                <p className="text-sm text-green-800">
-                  🚀 Development Mode: reCAPTCHA is disabled for faster testing
-                </p>
-              </div>
-            ) : (
-              <ReCAPTCHA
-                ref={recaptchaRef}
-                sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-                onChange={handleRecaptchaChange}
-                onExpired={handleRecaptchaExpired}
-                theme="light"
-              />
-            )}
           </div>
       </div>
     </div>

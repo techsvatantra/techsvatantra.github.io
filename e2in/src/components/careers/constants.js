@@ -1,4 +1,5 @@
-export const stepNames = ["Basic Info", "Experience", "Review & Submit"];
+
+export const stepNames = ["Basic Info", "Experience", "References", "Review & Submit"];
 export const defaultIssuingAuthority = "NJ Division of Consumer Affairs";
 
 export const jobOpenings = [

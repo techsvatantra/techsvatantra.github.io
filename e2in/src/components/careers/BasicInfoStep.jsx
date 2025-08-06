@@ -3,10 +3,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import FormError from "./FormError";
-import { Controller } from "react-hook-form";
+import { FileText, HeartPulse } from "lucide-react";
 
-const BasicInfoStep = ({ register, errors, formData, handleFileChange, control }) => {
-  const { ref, ...rest } = register("resume");
+const BasicInfoStep = ({ register, errors, formData, handleFileChange }) => {
+  // Don't use register for file inputs as we handle them manually
+  const resumeRef = React.useRef(null);
+  const healthAttestationRef = React.useRef(null);
+
   return (
     <div className="space-y-6">
       <h3 className="text-xl font-semibold text-primary mb-6">Step 1: Basic Information</h3>
@@ -28,29 +31,11 @@ const BasicInfoStep = ({ register, errors, formData, handleFileChange, control }
         <FormError message={errors.phone?.message} />
       </div>
       <div className="space-y-2">
-        <Label htmlFor="address">Address</Label>
-        <Input id="address" {...register("address")} placeholder="Street, City, State, Zip" />
-        <FormError message={errors.address?.message} />
-      </div>
-      
-      {/* SMS Consent Checkbox */}
-      <div className="space-y-2">
         <div className="flex items-start space-x-3">
-          <Controller
-            name="smsConsent"
-            control={control}
-            render={({ field }) => (
-              <Checkbox 
-                id="smsConsent" 
-                checked={field.value}
-                onCheckedChange={field.onChange}
-                className="mt-1"
-              />
-            )}
-          />
+          <Checkbox id="sms-consent" {...register("smsConsent")} className="mt-1" />
           <div className="grid gap-1.5 leading-none">
             <label 
-              htmlFor="smsConsent" 
+              htmlFor="sms-consent" 
               className="leading-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
               style={{ fontSize: '10px' }}
             >
@@ -65,36 +50,46 @@ const BasicInfoStep = ({ register, errors, formData, handleFileChange, control }
         </div>
         <FormError message={errors.smsConsent?.message} />
       </div>
-      
       <div className="space-y-2">
-        <Label htmlFor="resume">Resume/CV *</Label>
-        <Controller
-          name="resume"
-          control={control}
-          render={({ field: { onChange, onBlur, name }, fieldState: { error } }) => (
-            <div>
-              <Input
-                id="resume"
-                name={name}
-                type="file"
-                accept=".pdf,.doc,.docx"
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  onChange(file);
-                  handleFileChange(e);
-                }}
-                onBlur={onBlur}
-                className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/80"
-              />
-              {formData.resumeName && (
-                <p className="text-xs text-muted-foreground mt-1">
-                  Selected: {formData.resumeName}
-                </p>
-              )}
-              {error && <p className="text-red-500 text-xs mt-1">{error.message}</p>}
-            </div>
-          )}
-        />
+        <Label htmlFor="address">Address</Label>
+        <Input id="address" {...register("address")} placeholder="Street, City, State, Zip" />
+        <FormError message={errors.address?.message} />
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-2">
+          <Label htmlFor="resume" className="flex items-center">
+            <FileText className="h-4 w-4 mr-2 text-primary" />
+            Upload Resume (optional)
+          </Label>
+          <Input 
+            id="resume" 
+            type="file" 
+            accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            ref={resumeRef}
+            onChange={(e) => handleFileChange(e, 'resume')}
+            className="file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
+          />
+          {formData.resumeName && <p className="text-xs text-muted-foreground mt-1">Selected: {formData.resumeName}</p>}
+          <p className="text-xs text-muted-foreground">Accepted formats: PDF, DOC, DOCX (max 10MB)</p>
+          <FormError message={errors.resume?.message} />
+        </div>
+        <div className="space-y-2">
+           <Label htmlFor="healthAttestation" className="flex items-center">
+            <HeartPulse className="h-4 w-4 mr-2 text-primary" />
+            Upload Health Attestation Form (optional)
+          </Label>
+          <Input 
+            id="healthAttestation" 
+            type="file" 
+            accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            ref={healthAttestationRef}
+            onChange={(e) => handleFileChange(e, 'healthAttestation')}
+            className="file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
+          />
+          {formData.healthAttestationName && <p className="text-xs text-muted-foreground mt-1">Selected: {formData.healthAttestationName}</p>}
+          <p className="text-xs text-muted-foreground">Accepted formats: PDF, DOC, DOCX (max 10MB)</p>
+          <FormError message={errors.healthAttestation?.message} />
+        </div>
       </div>
     </div>
   );

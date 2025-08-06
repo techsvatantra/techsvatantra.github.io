@@ -33,7 +33,7 @@ export const GOOGLE_APPS_SCRIPT_URLS = {
    * Used in: src/components/Careers.jsx
    * Note: Supports file uploads (resume) via base64 encoding
    */
-  CAREERS_APPLICATION: 'https://script.google.com/macros/s/AKfycbxyyImJyW6VjNTfAeJDhXyIsXEuqRidBXVGoChcz99_EhRT-1L5zh-eomUPyD0HMkA0/exec',
+  CAREERS_APPLICATION: 'https://script.google.com/macros/s/AKfycbw9yF735UbhQAP4kdIX3hMAjtyYSewGCuitpwR68-MpDPgiD-pZ5ohCE7U9fLaseQx15g/exec',
 };
 
 /**
