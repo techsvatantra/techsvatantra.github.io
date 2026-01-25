@@ -37,33 +37,6 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 
-  <script>
-    window.addEventListener('load', (event) => {
-      console.log('The page has fully loaded');
-      var form = document.forms['submit-to-google-sheet']
-
-      form.addEventListener('submit', async function (e) {
-        var scriptURL = 'https://script.google.com/macros/s/AKfycbwYVwgtb2LryeFp4ubd_NEPxa9CO3yJnyFBX_fLeltW6cuZntdIDJJEqSua3XgJ0DaMcQ/exec'
-        var successMessage = document.getElementById('success-message');
-        var sendingMessage = document.getElementById('sending-message');
-        e.preventDefault();
-        const response = await fetch(scriptURL, {
-          method: "POST",
-          body: new FormData(form),
-        });
-        if (response.ok) {
-          console.log("Form submitted successfully!");
-          document.getElementById("success-message").style.display = 'block';
-          document.getElementById("error-message").style.display = 'none';
-        } else {
-          console.error("Error submitting form:", response.statusText);
-          document.getElementById("success-message").style.display = 'none';
-          document.getElementById("error-message").style.display = 'block';
-        }
-
-      });
-    })
-  </script>
 </head>
 
 <body>
@@ -111,7 +84,8 @@
           <div class="col-lg-8 mt-5 mt-lg-0">
 
             <form method="post" role="form" class="php-email-form" id="submit-to-google-sheet"
-              name="submit-to-google-sheet">
+              name="submit-to-google-sheet"
+              data-script-url="https://script.google.com/macros/s/AKfycbwYVwgtb2LryeFp4ubd_NEPxa9CO3yJnyFBX_fLeltW6cuZntdIDJJEqSua3XgJ0DaMcQ/exec">
 
               <div class="row gy-3">
                 <div class="col-md-6 form-group">
@@ -221,6 +195,7 @@
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="aboutus.html">About Us</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="contact.html">Contact</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="privacy-policy.html">Privacy Policy</a></li>
             </ul>
           </div>
 
@@ -270,6 +245,9 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!-- Form Handler -->
+  <script src="assets/js/forms.js"></script>
 
 </body>
 
