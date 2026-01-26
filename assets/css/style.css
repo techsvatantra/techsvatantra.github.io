@@ -799,6 +799,7 @@ section {
 .courses .course-content p {
   font-size: 14px;
   color: #777777;
+  line-height: 1.6;
 }
 
 .courses .course-content h4 {
@@ -807,6 +808,57 @@ section {
   padding: 7px 14px;
   color: #fff;
   margin: 0;
+}
+
+/* Workshop Level Badges */
+.courses .badge-level {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.courses .badge-basic {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.courses .badge-intermediate {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+.courses .badge-advanced {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.courses .badge-duration {
+  font-size: 13px;
+  color: #666;
+}
+
+.courses .badge-duration i {
+  margin-right: 4px;
+  color: #5fcf80;
+}
+
+.courses .course-meta {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.courses .course-meta span {
+  font-size: 13px;
+  color: #666;
+}
+
+.courses .course-meta i {
+  color: #5fcf80;
+  margin-right: 5px;
 }
 
 .courses .course-content .price {
@@ -1985,5 +2037,109 @@ section {
   /* Improve touch on small screens */
   .footer-links li {
     padding: 8px 0;
+  }
+}
+
+/*--------------------------------------------------------------
+# FAQ Section
+--------------------------------------------------------------*/
+.faq {
+  padding: 60px 0;
+  background: #fff;
+}
+
+.faq .faq-list {
+  padding: 0;
+}
+
+.faq .faq-list ul {
+  padding: 0;
+  list-style: none;
+}
+
+.faq .faq-list li {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.faq .faq-list li:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.faq .faq-list a {
+  display: block;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  padding-right: 25px;
+  cursor: pointer;
+  color: #37423b;
+  transition: 0.3s;
+}
+
+.faq .faq-list a:hover {
+  color: #5fcf80;
+}
+
+.faq .faq-list .icon-help {
+  font-size: 24px;
+  position: absolute;
+  right: 0;
+  left: 0;
+  color: #5fcf80;
+}
+
+.faq .faq-list .icon-show,
+.faq .faq-list .icon-close {
+  font-size: 24px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.faq .faq-list a.collapsed .icon-show {
+  display: inline-block;
+}
+
+.faq .faq-list a.collapsed .icon-close {
+  display: none;
+}
+
+.faq .faq-list a .icon-show {
+  display: none;
+}
+
+.faq .faq-list a .icon-close {
+  display: inline-block;
+  color: #5fcf80;
+}
+
+.faq .faq-list p {
+  margin: 15px 0 0 25px;
+  padding: 0;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #555;
+}
+
+.faq .faq-list .icon-help {
+  position: relative;
+  top: 2px;
+  margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+  .faq .faq-list a {
+    font-size: 16px;
+    padding-right: 20px;
+  }
+  
+  .faq .faq-list p {
+    margin-left: 0;
+    font-size: 14px;
   }
 }

@@ -29,6 +29,39 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
+  <!-- Structured Data - Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Tech Svatantra",
+    "description": "Tech Svatantra empowers senior citizens with patient, 1:1 technology training. Learn smartphones, online banking, UPI payments, and stay safe online.",
+    "url": "https://techsvatantra.github.io",
+    "logo": "https://techsvatantra.github.io/assets/img/tsl-logo.png",
+    "email": "techsvatantra@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bangalore",
+      "addressCountry": "IN"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Bangalore"
+    },
+    "sameAs": [
+      "https://www.facebook.com/profile.php?id=61558045426397",
+      "https://whatsapp.com/channel/0029VaW1bdH545usYj2Tu115"
+    ],
+    "knowsAbout": [
+      "Digital Literacy for Seniors",
+      "Smartphone Training",
+      "Online Safety",
+      "UPI Payments",
+      "Video Calling"
+    ]
+  }
+  </script>
+
   <!-- =======================================================
   * Template Name: Mentor
   * Updated: Mar 13 2024 with Bootstrap v5.3.3
@@ -44,7 +77,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <a href="index.html" class="logo me-auto"><img src="assets/img/tsl-logo.png" alt="" class="img-fluid" width="100"
+      <a href="index.html" class="logo me-auto"><img src="assets/img/tsl-logo.png" alt="Tech Svatantra Logo" class="img-fluid" width="100"
           height="180"></a>
 
       <nav id="navbar" class="navbar order-last order-lg-0">
@@ -80,7 +113,7 @@
 
         <div class="row">
           <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
-            <img src="assets/img/tech_svatantra_training_logo.png" class="img-fluid" alt="">
+            <img src="assets/img/tech_svatantra_training_logo.png" class="img-fluid" alt="Tech Svatantra training session with seniors learning technology" loading="lazy">
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
             <h3>Empower seniors to embrace technology, gracefully.</h3>
@@ -172,50 +205,54 @@
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
             <div class="course-item">
-              <img src="assets/img/concept.png" class="img-fluid" alt="...">
+              <img src="assets/img/concept.png" class="img-fluid" alt="Basic workshop - Learn internet fundamentals and essential apps" loading="lazy">
               <div class="course-content">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Basic</h4>
+                  <span class="badge-level badge-basic">Beginner</span>
+                  <span class="badge-duration"><i class="bx bx-time"></i> 2-3 Hours</span>
                 </div>
 
                 <h3><a href="workshop-details-absolutely-new-to-tech.html">Absolutely New to Tech?</a></h3>
-                <p>By attending this workshop, you will be able to understand, "How the Internet works?". You will be
-                  able to use popular apps to book an Auto, Cab and Groceries. You will be able to start using Mobile
-                  Banking/Internet Banking as well. You will also be able to spot the "bad" elements while you are
-                  online - Safety is very important.</p>
+                <p>Learn how the Internet works, use apps to book Auto/Cab and Groceries, start with Mobile Banking, and learn to spot online threats. Perfect for those taking their first steps into the digital world.</p>
+                <div class="course-meta">
+                  <span><i class="bx bx-check-circle"></i> No experience needed</span>
+                </div>
               </div>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
             <div class="course-item">
-              <img src="assets/img/application-collage.png" class="img-fluid" alt="...">
+              <img src="assets/img/application-collage.png" class="img-fluid" alt="Intermediate workshop - Explore apps, social media and video calls" loading="lazy">
               <div class="course-content">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Intermediate</h4>
+                  <span class="badge-level badge-intermediate">Intermediate</span>
+                  <span class="badge-duration"><i class="bx bx-time"></i> 3-4 Hours</span>
                 </div>
 
                 <h3><a href="workshop-details-technology-is-interesting.html">Technology is interesting!</a></h3>
-                <p>By attending this workshop, you will be able to independently explore the wonderful world of Apps on
-                  the App Store (or Play Store). You will be able to make online bill payments, use social media more effectively, and attend video and voice calls. You will be able to spot frauds and stay safe from them.
-                </p>
+                <p>Explore the App Store, make online bill payments, use social media effectively, and master video calls. Learn to identify and avoid online frauds confidently.</p>
+                <div class="course-meta">
+                  <span><i class="bx bx-check-circle"></i> Basic smartphone skills required</span>
+                </div>
               </div>
             </div>
           </div> <!-- End Course Item-->
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
             <div class="course-item">
-              <img src="assets/img/course-3.jpg" class="img-fluid" alt="...">
+              <img src="assets/img/course-3.jpg" class="img-fluid" alt="Advanced workshop - Cloud storage, voice assistants and AI tools" loading="lazy">
               <div class="course-content">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Advanced</h4>
+                  <span class="badge-level badge-advanced">Advanced</span>
+                  <span class="badge-duration"><i class="bx bx-time"></i> 3-4 Hours</span>
                 </div>
 
                 <h3><a href="workshop-details-turning-pro.html">Turning Pro</a></h3>
-                <p>By attending this workshop, you will be able to start customising your phone to do basic things such
-                  as native language support, use Cloud Applications for Storage. You should be able to use Voice
-                  Assistants and ChatGPT to perform your queries. You will be aware of the do's and don'ts of Online
-                  Privacy and Safety.</p>
+                <p>Customise your phone with regional languages, use Cloud storage, master Voice Assistants and ChatGPT. Understand online privacy and safety best practices.</p>
+                <div class="course-meta">
+                  <span><i class="bx bx-check-circle"></i> Intermediate skills required</span>
+                </div>
               </div>
             </div>
           </div> <!-- End Course Item-->
@@ -308,6 +345,92 @@
 
       </div>
     </section><!-- End Testimonials Section -->
+
+    <!-- ======= FAQ Section ======= -->
+    <section id="faq" class="faq">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>FAQ</h2>
+          <p>Frequently Asked Questions</p>
+        </div>
+
+        <div class="faq-list">
+          <ul>
+            <li data-aos="fade-up" data-aos-delay="100">
+              <i class="bx bx-help-circle icon-help"></i>
+              <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">
+                Who can attend the workshops?
+                <i class="bx bx-chevron-down icon-show"></i>
+                <i class="bx bx-chevron-up icon-close"></i>
+              </a>
+              <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
+                <p>
+                  Our workshops are designed specifically for senior citizens (60+ years) who want to learn technology at their own pace. Whether you've never used a smartphone or want to learn advanced features, we have a workshop for you. Family members are also welcome to attend and support their elders.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="150">
+              <i class="bx bx-help-circle icon-help"></i>
+              <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">
+                Do I need to bring my own device?
+                <i class="bx bx-chevron-down icon-show"></i>
+                <i class="bx bx-chevron-up icon-close"></i>
+              </a>
+              <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  Yes, we encourage you to bring your own smartphone or tablet so you can learn on the device you'll be using daily. This way, you'll be familiar with your own phone's settings and apps. If you don't have a device, please let us know in advance.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="200">
+              <i class="bx bx-help-circle icon-help"></i>
+              <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">
+                What if I forget what I learned?
+                <i class="bx bx-chevron-down icon-show"></i>
+                <i class="bx bx-chevron-up icon-close"></i>
+              </a>
+              <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  Don't worry! We provide simple printed handouts with step-by-step instructions that you can refer to at home. We also encourage participants to take notes during the session. Our trainers are patient and happy to repeat concepts as many times as needed.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="250">
+              <i class="bx bx-help-circle icon-help"></i>
+              <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed">
+                Where are the workshops conducted?
+                <i class="bx bx-chevron-down icon-show"></i>
+                <i class="bx bx-chevron-up icon-close"></i>
+              </a>
+              <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  We conduct workshops at various community centers, churches, temples, and senior care facilities across Bangalore. We also partner with organizations in other cities like Hubli and Mysore. Check our workshops page for upcoming locations or contact us to arrange a workshop in your community.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="300">
+              <i class="bx bx-help-circle icon-help"></i>
+              <a data-bs-toggle="collapse" data-bs-target="#faq-list-5" class="collapsed">
+                Is the workshop safe? Will I be scammed online?
+                <i class="bx bx-chevron-down icon-show"></i>
+                <i class="bx bx-chevron-up icon-close"></i>
+              </a>
+              <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  Online safety is our top priority! Every workshop includes a dedicated session on recognizing and avoiding online frauds, scams, and phishing attempts. We teach you the warning signs to look for and safe practices to follow. Our goal is to make you confident AND safe online.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section><!-- End FAQ Section -->
 
   </main><!-- End #main -->
 
