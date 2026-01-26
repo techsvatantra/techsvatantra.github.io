@@ -1823,6 +1823,15 @@ section {
   margin: 0 auto 15px auto;
 }
 
+.testimonials .testimonial-item .testimonial-icon {
+  margin: 0 auto 15px auto;
+}
+
+.testimonials .testimonial-item .testimonial-icon i {
+  font-size: 80px;
+  color: #5fcf80;
+}
+
 .testimonials .testimonial-item h3 {
   font-size: 18px;
   font-weight: bold;
