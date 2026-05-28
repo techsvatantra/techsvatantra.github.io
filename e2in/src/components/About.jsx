@@ -64,6 +64,18 @@ const About = () => {
                   </div>
                </div>
             </div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mt-6 pt-6 border-t border-primary/20"
+            >
+              <p className="text-xs text-muted-foreground text-center leading-relaxed">
+                e2i home care adheres to the principles of truth in advertising, and all information accurately represents the organization's scope of services provided, licenses, price claims or testimonials.
+              </p>
+            </motion.div>
           </motion.div>
           
           <motion.div
@@ -147,7 +159,7 @@ const About = () => {
             ))}
           </div>
            <p className="text-center text-muted-foreground mt-10 px-4 max-w-3xl mx-auto">
-            The name <span className="font-brand text-primary">e2i</span> reflects our commitment to <span className="font-semibold text-primary">Empathy</span> and <span className="font-semibold text-primary">Inclusion</span>. These principles guide every personal connection our coordinators foster, ensuring a caring, supportive, and welcoming environment for everyone.
+            The name <span className="font-brand text-primary">e2i</span> reflects our commitment to <span className="font-semibold text-primary">Empathy</span> and <span className="font-semibold text-primary">Inclusion</span>—the foundation of everything we do.
           </p>
         </motion.div>
       </div>
