@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tech Svatantra | Ask Me Anything | 18 November 2026</title>
+  <style>
+    :root { --ink: #172e25; --green: #176443; --mint: #eaf5ed; --scale: 1; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #e3e8e4; color: var(--ink); font-family: "Trebuchet MS", sans-serif; }
+    .sheet { width: calc(1080px * var(--scale)); height: calc(1350px * var(--scale)); margin: 0 auto; overflow: hidden; }
+    .flyer { width: 1080px; height: 1350px; background: #fff; transform: scale(var(--scale)); transform-origin: top left; overflow: hidden; }
+    .heading { padding: 28px 64px 16px; border-top: 12px solid var(--green); }
+    .brand { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 23px; }
+    .brand img { width: 168px; height: 87px; object-fit: contain; }
+    .audience { font-size: 27px; font-weight: bold; color: var(--green); text-align: right; }
+    h1 { font-size: 82px; line-height: 1.04; margin: 0 0 17px; letter-spacing: 0; }
+    .tagline { margin: 0; font-size: 31px; line-height: 1.35; }
+    .facts { display: flex; gap: 0; margin-top: 25px; font-size: 26px; font-weight: bold; color: var(--green); }
+    .facts span + span { border-left: 2px solid #b7d6c2; margin-left: 25px; padding-left: 25px; }
+    .art { width: 1080px; height: 265px; display: block; object-fit: contain; object-position: center; background: #f5f8f4; }
+    .questions { padding: 15px 64px 15px; }
+    h2 { font-size: 37px; margin: 0 0 12px; line-height: 1.2; }
+    .topics { font-size: 29px; line-height: 1.5; margin: 0 0 14px; }
+    .reassurance { font-size: 27px; line-height: 1.4; margin: 0; }
+    .event { background: var(--mint); border-top: 2px solid #cde4d4; border-bottom: 2px solid #cde4d4; padding: 20px 64px; display: grid; grid-template-columns: 1fr 185px; gap: 27px; align-items: center; }
+    .date { font-size: 41px; font-weight: bold; line-height: 1.2; margin: 0 0 9px; }
+    .time { font-size: 35px; margin: 0 0 16px; }
+    .join { font-size: 28px; font-weight: bold; margin: 0 0 7px; }
+    .meet { color: var(--green); font-size: 27px; text-decoration-thickness: 1px; text-underline-offset: 4px; overflow-wrap: anywhere; }
+    .qr { text-align: center; }
+    .qr img { display: block; width: 174px; height: 174px; margin: 0 auto 7px; }
+    .qr p { font-size: 21px; margin: 0; font-weight: bold; }
+    .footer { padding: 20px 64px 0; }
+    .invitation { font-size: 28px; font-weight: bold; margin: 0 0 13px; }
+    .safety { font-size: 23px; line-height: 1.35; margin: 0; }
+    .channel { font-size: 23px; line-height: 1.35; margin: 14px 0 0; }
+    .channel a { color: var(--green); text-underline-offset: 4px; overflow-wrap: anywhere; }
+    @page { size: A4 portrait; margin: 0; }
+    @media print {
+      body { background: #fff; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .sheet { width: 210mm; height: 297mm; padding-top: 17.25mm; margin: 0; }
+      .flyer { transform: scale(0.734908); }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <article class="flyer" aria-label="Tech Svatantra Ask Me Anything session invitation">
+      <header class="heading">
+        <div class="brand">
+          <img src="assets/img/tsl-logo.png" alt="Tech Svatantra">
+          <div class="audience">A friendly technology Q&amp;A<br>for senior citizens</div>
+        </div>
+        <h1>Ask Me Anything!</h1>
+        <p class="tagline">Technology without hesitation.<br>Questions without judgement.</p>
+        <div class="facts"><span>FREE SESSION</span><span>30 MINUTES</span><span>MONTHLY</span></div>
+      </header>
+      <img class="art" src="assets/img/tech_svatantra_training_logo.png" alt="Illustration of seniors exploring technology together">
+      <section class="questions">
+        <h2>What would you like to know?</h2>
+        <p class="topics">Smartphones &bull; WhatsApp &bull; Digital payments<br>Online safety &bull; ChatGPT &bull; Everyday digital services</p>
+        <p class="reassurance">Your questions lead the conversation.<br>Simple answers, live demonstrations and practical tips.</p>
+      </section>
+      <section class="event" aria-label="Session details">
+        <div>
+          <p class="date">18 November 2026</p>
+          <p class="time">6:00-6:30 pm IST</p>
+          <p class="join">Join online on Google Meet</p>
+          <a class="meet" href="https://meet.google.com/ktn-eyow-ben">meet.google.com/ktn-eyow-ben</a>
+        </div>
+        <div class="qr">
+          <a href="https://meet.google.com/ktn-eyow-ben" aria-label="Join the Google Meet session"><img src="assets/flyers/ask-me-anything-meet-qr.png" alt="QR code for the Google Meet session"></a>
+          <p>Scan to join</p>
+        </div>
+      </section>
+      <footer class="footer">
+        <p class="invitation">No technical knowledge needed. No question is too simple.</p>
+        <p class="safety">Stay safe: never share passwords, OTPs or banking PINs.</p>
+        <p class="channel">WhatsApp channel: <a href="https://whatsapp.com/channel/0029VaW1bdH545usYj2Tu115">whatsapp.com/channel/0029VaW1bdH545usYj2Tu115</a></p>
+      </footer>
+    </article>
+  </main>
+  <script>
+    function fitFlyer() {
+      document.documentElement.style.setProperty('--scale', Math.min(1, document.documentElement.clientWidth / 1080));
+    }
+    fitFlyer();
+    window.addEventListener('resize', fitFlyer);
+  </script>
+</body>
+</html>

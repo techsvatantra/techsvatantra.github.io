@@ -33,6 +33,95 @@ h6 {
   font-family: "Raleway", sans-serif;
 }
 
+.ama-section {
+  --ama-green: #176443;
+  --ama-ink: #172e25;
+  background: #eaf5ed;
+  color: var(--ama-ink);
+  padding: 56px 0;
+  scroll-margin-top: 100px;
+}
+
+.ama-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 48px;
+}
+
+.ama-eyebrow {
+  color: var(--ama-green);
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.ama-section h2 {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 18px;
+}
+
+.ama-introduction > p:not(.ama-eyebrow) {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.ama-tagline { font-weight: 600; }
+.ama-topics { margin: 20px 0; }
+.ama-reassurance { margin-bottom: 0; font-weight: 600; }
+
+.ama-session {
+  border-left: 1px solid #b7d6c2;
+  padding-left: 40px;
+  align-self: center;
+  min-width: 0;
+}
+
+.ama-session h3 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.ama-time { font-size: 22px; margin-bottom: 10px; }
+.ama-platform { font-size: 17px; margin-bottom: 22px; }
+.ama-session i { margin-right: 6px; }
+
+.ama-join {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 48px;
+  padding: 12px 18px;
+  border-radius: 6px;
+  background: var(--ama-green);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.ama-join:hover { background: #10492f; color: #fff; }
+.ama-channel { display: block; width: fit-content; margin-top: 20px; font-size: 17px; font-weight: 600; }
+.ama-section a:not(.ama-join) { color: var(--ama-green); text-decoration: underline; text-underline-offset: 4px; }
+.ama-section a:focus-visible, .ama-hero-note a:focus-visible { outline: 3px solid #b87610; outline-offset: 5px; }
+.ama-updates { font-size: 15px; margin: 8px 0 22px; }
+.ama-flyer-links { display: flex; flex-wrap: wrap; gap: 12px 24px; font-size: 16px; }
+.ama-safety { font-size: 15px; line-height: 1.6; margin: 22px 0 0; }
+.ama-hero-note { margin: 20px 0 0; font-size: 17px; }
+.ama-hero-note a { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
+.ama-hero-note a:hover { color: #fff; }
+
+@media (max-width: 767px) {
+  .ama-section { padding: 36px 0; }
+  .ama-layout { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .ama-section h2 { font-size: 30px; }
+  .ama-session { border-left: 0; border-top: 1px solid #b7d6c2; padding: 26px 0 0; }
+  .ama-session h3 { font-size: 26px; }
+  .ama-join { width: 100%; }
+}
+
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
